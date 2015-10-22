@@ -129,6 +129,7 @@ fi
 %changelog
 * Thu Oct 22 2015 - robert (at) meinit.nl
 - Importing to github and attempting to build in Travis CI
+- Updating to 7.0.65
 * Fri Aug 19 2011 - robert (at) meinit.nl
 - Updated to apache tomcat 7.0.20
 - Split (example) applications into their own RPM.
