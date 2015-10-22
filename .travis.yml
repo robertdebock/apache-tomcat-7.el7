@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+- docker run -v /home/travis/build/robertdebock/rpmbuildtest:/data robertdebock/docker-centos-rpmbuild /bin/sh /data/rpmbuild.sh -d /data -s apache-tomcat.spec
+
+notifications:
+  email: false
