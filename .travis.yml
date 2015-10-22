@@ -3,6 +3,10 @@ sudo: required
 services:
   - docker
 
+before_script:
+- pwd
+- ls -l
+
 script:
 - docker run -v /home/travis/build/robertdebock/rpmbuildtest:/data robertdebock/docker-centos-rpmbuild /bin/sh /data/rpmbuild.sh -d /data -s apache-tomcat.spec
 
