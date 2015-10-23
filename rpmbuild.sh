@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 usage() {
   echo "Usage: $0 -d directory -s SPECfile"
