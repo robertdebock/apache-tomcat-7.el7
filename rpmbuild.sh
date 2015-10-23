@@ -74,7 +74,7 @@ checkvalues() {
 buildrpm() {
   chown root:root ${directory}/${specfile}
   mkdir -p ${directory}/rpmbuild/{RPMS,BUILD,SOURCES}
-  wget -P ${directory}/rpmbuild/SOURCES/ http://www.eu.apache.org/dist/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.tar.gz
+  wget -P ${directory}/rpmbuild/SOURCES/ http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v7.0.65/src/apache-tomcat-7.0.65-src.tar.gz
   rpmbuild --define "_topdir ${directory}/rpmbuild" -ba ${directory}/${specfile}
 }
 
