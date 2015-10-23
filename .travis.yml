@@ -8,8 +8,7 @@ before_script:
 - ls -l
 
 script:
-- docker run -v /home/travis/build/robertdebock/rpmbuildtest:/data robertdebock/docker-centos-rpmbuild ls -las /data
-#- docker run -v /home/travis/build/robertdebock/rpmbuildtest:/data robertdebock/docker-centos-rpmbuild /bin/sh /data/rpmbuild.sh -d /data -s apache-tomcat.spec
+- docker run -v /home/travis/build/robertdebock/apache-tomcat-rpm:/data robertdebock/docker-centos-rpmbuild /bin/sh /data/rpmbuild.sh -d /data -s apache-tomcat.spec
 
 notifications:
   email: false
