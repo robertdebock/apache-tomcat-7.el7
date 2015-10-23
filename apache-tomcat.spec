@@ -9,7 +9,7 @@ Source: %{name}-%{version}-src.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
-Requires: java-1.6.0-openjdk
+Requires: java
 BuildArch: x86_64
 
 %description
@@ -85,10 +85,18 @@ mkdir -p %{buildroot}/var/run/apache-tomcat
 rm -rf %{buildroot}
 
 %pre
-getent group tomcat > /dev/null || groupadd -r tomcat
-getent passwd tomcat > /dev/null || useradd -r -g tomcat tomcat
-
-
+case "$1" in
+  1)
+    # This is an initial installation.
+    getent group %{name} > /dev/null || groupadd -r %{name}
+    getent passwd %{name} > /dev/null || useradd -r -g %{name} %{name}
+  ;;
+  2)
+    # This is an upgrade.
+    # Do nothing.
+    :
+  ;;
+esac
 
 %post
 case "$1" in
