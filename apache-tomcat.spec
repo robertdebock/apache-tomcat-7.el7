@@ -9,7 +9,6 @@ Source: %{name}-%{version}-src.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
-BuildRequires: ant-trax
 Requires: java-1.6.0-openjdk
 BuildArch: x86_64
 
