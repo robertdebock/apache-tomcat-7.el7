@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Trigger a new build.
+
 usage() {
   echo "Usage: $0 -d directory -s SPECfile"
   echo
