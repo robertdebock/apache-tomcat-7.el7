@@ -4,7 +4,7 @@ services:
   - docker
 
 script:
-- docker run -v $(pwd):/data robertdebock/docker-centos-rpmbuild /bin/sh /data/rpmbuild.sh -d /data -s apache-tomcat.spec
+- docker run -v $(pwd):/data robertdebock/docker-centos-rpmbuild /bin/sh -x /data/rpmbuild.sh -d /data -s apache-tomcat.spec
 
 notifications:
   email: false
