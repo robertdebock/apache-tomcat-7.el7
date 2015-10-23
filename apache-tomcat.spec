@@ -73,13 +73,13 @@ ant
 
 %install
 rm -Rf %{buildroot}
-mkdir -p %{buildroot}/opt/apache-tomcat
-mkdir -p %{buildroot}/opt/apache-tomcat/pid
-mkdir -p %{buildroot}/opt/apache-tomcat/webapps
+mkdir -p %{buildroot}/opt/%{name}
+mkdir -p %{buildroot}/opt/%{name}/pid
+mkdir -p %{buildroot}/opt/%{name}/webapps
 mkdir -p %{buildroot}/etc/init.d/
-mkdir -p %{buildroot}/var/run/apache-tomcat
-%{__cp} -Rip ./output/build/{bin,conf,lib,logs,temp,webapps} %{buildroot}/opt/apache-tomcat
-%{__cp} %{_sourcedir}/apache-tomcat-initscript %{buildroot}/etc/init.d/apache-tomcat
+mkdir -p %{buildroot}/var/run/%{name}
+%{__cp} -Rip ./output/build/{bin,conf,lib,logs,temp,webapps} %{buildroot}/opt/%{name}
+%{__cp} %{_sourcedir}/%{name}-initscript %{buildroot}/etc/init.d/%{name}
 
 %clean
 rm -rf %{buildroot}
@@ -129,33 +129,35 @@ esac
 
 %files
 %defattr(-,tomcat,tomcat,-)
-%dir /opt/apache-tomcat
-%config /opt/apache-tomcat/conf/*
-/opt/apache-tomcat/bin
-/opt/apache-tomcat/lib
-/opt/apache-tomcat/logs
-/opt/apache-tomcat/temp
-/opt/apache-tomcat/pid
-%dir /opt/apache-tomcat/webapps
-/var/run/apache-tomcat
-%attr(0755,root,root) /etc/init.d/apache-tomcat
+%dir /opt/%{name}
+%config /opt/%{name}/conf/*
+/opt/%{name}/bin
+/opt/%{name}/lib
+/opt/%{name}/logs
+/opt/%{name}/temp
+/opt/%{name}/pid
+%dir /opt/%{name}/webapps
+/var/run/%{name}
+%attr(0755,root,root) /etc/init.d/%{name}
 
 %files manager
-/opt/apache-tomcat/webapps/manager
+/opt/%{name}/webapps/manager
 
 %files ROOT
-/opt/apache-tomcat/webapps/ROOT
+/opt/%{name}/webapps/ROOT
 
 %files docs
-/opt/apache-tomcat/webapps/docs
+/opt/%{name}/webapps/docs
 
 %files examples
-/opt/apache-tomcat/webapps/examples
+/opt/%{name}/webapps/examples
 
 %files host-manager
-/opt/apache-tomcat/webapps/host-manager
+/opt/%{name}/webapps/host-manager
 
 %changelog
+* Fri Oct 23 2015 - robert (at) meinit.nl
+- Changed apache-tomcat for %{name} and changed %pre logic.
 * Thu Oct 22 2015 - robert (at) meinit.nl
 - Importing to github and attempting to build in Travis CI
 - Updating to 7.0.65
