@@ -88,14 +88,36 @@ rm -rf %{buildroot}
 getent group tomcat > /dev/null || groupadd -r tomcat
 getent passwd tomcat > /dev/null || useradd -r -g tomcat tomcat
 
+
+
 %post
-chkconfig --add %{name}
+case "$1" in
+  1)
+    # This is an initial install.
+    chkconfig --add %{name}
+  ;;
+  2)
+    # This is an upgrade.
+    # First delete the registered service.
+    chkconfig --del %{name}
+    # Then add the registered service. In case run levels changed in the init script, the service will be correctly re-added.
+    chkconfig --add %{name}
+  ;;
+esac
 
 %preun
-if [ "$1" = "0" ] ; then
-service %{name} stop > /dev/null 2>&1
-chkconfig --del %{name}
-fi
+case "$1" in
+  0)
+    # This is an un-installation.
+    service %{name} stop
+    chkconfig --del %{name}
+  ;;
+  1)
+    # This is an upgrade.
+    # Do nothing.
+    :
+  ;;
+esac
 
 %files
 %defattr(-,tomcat,tomcat,-)
