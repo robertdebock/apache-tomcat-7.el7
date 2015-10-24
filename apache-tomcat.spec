@@ -72,6 +72,7 @@ java.7.home=/etc/alternatives/jre_1.7.0_openjdk
 EOF
 
 %build
+JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk"
 ant
 
 %install
