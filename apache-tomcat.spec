@@ -10,6 +10,7 @@ Source: %{name}-%{version}-src.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
 BuildRequires: java-1.6.0-openjdk
+BuildRequires: java-1.7.0-openjdk
 Requires: java
 BuildArch: x86_64
 
@@ -67,6 +68,7 @@ The host-manager web application of Apache Tomcat.
 # This tells ant to install software in a specific directory.
 cat << EOF >> build.properties
 base.path=%{buildroot}/opt/apache-tomcat
+java.7.home=/etc/alternatives/jre_1.7.0_openjdk
 EOF
 
 %build
