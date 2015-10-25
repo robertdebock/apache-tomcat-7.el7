@@ -10,6 +10,7 @@ Source: %{name}-%{version}-src.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
 BuildRequires: java-1.6.0-openjdk
+BuildRequires: java-1.7.0-openjdk
 Requires: java
 BuildArch: x86_64
 
@@ -72,6 +73,7 @@ EOF
 
 %build
 #JAVA_HOME="/usr/lib/jvm/java-1.6.0-openjdk"
+update-alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk.x86_64
 /bin/java -version
 ant
 
