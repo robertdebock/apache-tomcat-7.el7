@@ -74,8 +74,11 @@ EOF
 %build
 update-alternatives --list
 update-alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk.x86_64/bin/java
+update-alternatives --display java_sdk_openjdk
 update-alternatives --set java_sdk_openjdk /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/
+update-alternatives --display javac
 update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/bin/javac
+update-alternataives --display jre-openjdk
 update-alternatives --set jre_openjdk /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre/
 update-alternatives --list
 ant
