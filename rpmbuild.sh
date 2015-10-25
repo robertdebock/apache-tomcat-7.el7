@@ -77,7 +77,7 @@ buildrpm() {
   rpm -qa
   yum -y install wget ant java-1.6.0-openjdk java-1.6.0-openjdk-devel java-1.6.0-openjdk-headless
   wget -P ${directory}/rpmbuild/SOURCES/ http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v7.0.65/src/apache-tomcat-7.0.65-src.tar.gz
-  cp apache-tomcat-initscript ${directory}/rpmbuild/SOURCES/
+  cp ${directory}/apache-tomcat-initscript ${directory}/rpmbuild/SOURCES/
   rpmbuild --define "_topdir ${directory}/rpmbuild" -ba ${directory}/${specfile}
 }
 
