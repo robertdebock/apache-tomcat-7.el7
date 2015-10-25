@@ -72,6 +72,9 @@ java.7.home=/usr/lib/jvm/java-_1.7.0_openjdk
 EOF
 
 %build
+
+rpm -qa | grep java
+
 update-alternatives --list
 update-alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk.x86_64/bin/java
 update-alternatives --display java_sdk_openjdk
