@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# apache-tomcat
+#
+# chkconfig: - 85 15
+# description: Jakarta Tomcat Java Servlets and JSP server
+# processname: java
+# pidfile: /var/run/apache-tomcat/pid
+
+. /etc/rc.d/init.d/functions
+
+# Set Tomcat environment.
+USER=tomcat
+LOCKFILE=/var/lock/apache-tomcat
+export BASEDIR=/opt/apache-tomcat
+export TOMCAT_HOME=$BASEDIR
+export CATALINA_PID=/var/run/apache-tomcat/pid
+export CATALINA_OPTS="-DHOME=$BASEDIR/home -Xmx512m -Djava.awt.headless=true"
+
+case "$1" in
+  start)
+        echo -n "Starting apache-tomcat: "
+        status -p $CATALINA_PID apache-tomcat > /dev/null && failure || (su -p -s /bin/sh $USER -c "$TOMCAT_HOME/bin/catalina.sh start" > /dev/null && (touch $LOCKFILE ; success))
+        echo
+        ;;
+  stop)
+        echo -n "Shutting down apache-tomcat: "
+        status -p $CATALINA_PID apache-tomcat > /dev/null && su -p -s /bin/sh $USER -c "$TOMCAT_HOME/bin/catalina.sh stop" > /dev/null && (rm -f $LOCKFILE ; success) || failure
+        echo
+        ;;
+  restart)
+        $0 stop
+        $0 start
+        ;;
+  condrestart)
+       [ -e $LOCKFILE ] && $0 restart
+       ;;
+  status)
+        status -p $CATALINA_PID apache-tomcat
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart|condrestart|status}"
+        exit 1
+        ;;
+esac
