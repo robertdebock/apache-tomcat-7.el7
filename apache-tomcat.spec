@@ -81,7 +81,7 @@ update-alternatives --display java_sdk_openjdk
 update-alternatives --set java_sdk_openjdk /usr/lib/jvm/java-1.6.0-openjdk.x86_64 
 update-alternatives --display javac
 update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk.x86_64/bin/javac
-update-alternatives --display jre-openjdk
+update-alternatives --display jre_openjdk
 update-alternatives --set jre_openjdk /usr/lib/jvm/java-1.6.0-openjdk.x86_64/jre/
 update-alternatives --list
 ant
