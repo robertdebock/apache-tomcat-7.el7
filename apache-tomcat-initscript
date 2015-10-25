@@ -7,7 +7,7 @@
 # processname: java
 # pidfile: /var/run/apache-tomcat/pid
 
-. /etc/rc.d/init.d/functions
+. /etc/init.d/functions
 
 # Set Tomcat environment.
 USER=tomcat
