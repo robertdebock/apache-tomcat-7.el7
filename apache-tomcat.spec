@@ -74,8 +74,8 @@ EOF
 %build
 #JAVA_HOME="/usr/lib/jvm/java-1.6.0-openjdk"
 update-alternatives --list
-update-alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk.x86_64
-/bin/java -version
+update-alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk.x86_64/bin/java
+update-alternatives --list
 ant
 
 %install
