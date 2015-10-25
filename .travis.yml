@@ -7,7 +7,7 @@ script:
 # Build the RPM(s).
 - docker run -v $(pwd):/data robertdebock/docker-centos-rpmbuild /bin/sh /data/rpmbuild.sh -d /data -s apache-tomcat.spec
 # Test the installation of the RPM.
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /usr/bin/yum localinstall /data/rpmbuild/RPMS/x86_64/apache-tomcat-7.0.65-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /usr/bin/yum localinstall /data/rpmbuild/RPMS/x86_64/apache-tomcat-7.0.65-1.x86_64.rpm
 
 notifications:
   email: false
