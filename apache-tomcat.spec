@@ -72,9 +72,11 @@ java.7.home=/usr/lib/jvm/java-_1.7.0_openjdk
 EOF
 
 %build
-#JAVA_HOME="/usr/lib/jvm/java-1.6.0-openjdk"
 update-alternatives --list
 update-alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk.x86_64/bin/java
+update-alternatives --set java_sdk_openjdk /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/
+update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/bin/javac
+update-alternatives --set jre_openjdk /usr/lib/jvm/java-1.6.0-openjdk-1.6.0.36.x86_64/jre/
 update-alternatives --list
 ant
 
