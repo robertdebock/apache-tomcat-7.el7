@@ -71,7 +71,8 @@ java.7.home=/usr/lib/jvm/java-_1.7.0_openjdk
 EOF
 
 %build
-JAVA_HOME="/usr/lib/jvm/java-1.6.0-openjdk"
+#JAVA_HOME="/usr/lib/jvm/java-1.6.0-openjdk"
+/bin/java -version
 ant
 
 %install
