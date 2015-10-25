@@ -68,7 +68,7 @@ The host-manager web application of Apache Tomcat.
 # This tells ant to install software in a specific directory.
 cat << EOF >> build.properties
 base.path=%{buildroot}/opt/apache-tomcat
-java.7.home=/usr/lib/jvm/java-_1.7.0_openjdk
+java.7.home=/usr/lib/jvm/jre-1.7.0
 EOF
 
 %build
