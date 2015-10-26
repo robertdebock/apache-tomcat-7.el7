@@ -85,11 +85,11 @@ ant
 rm -Rf %{buildroot}
 mkdir -p %{buildroot}/opt/%{name}
 mkdir -p %{buildroot}/opt/%{name}/pid
-mkdir -p %{buildroot}/opt/%{name}/webapps
-mkdir -p %{buildroot}/etc/init.d/
+mkdir -p %{buildroot}/opt/%{name}/webapps/
+mkdir -p %{buildroot}/etc/systemd/system/
 mkdir -p %{buildroot}/var/run/%{name}
 %{__cp} -Rip ./output/build/{bin,conf,lib,logs,temp,webapps} %{buildroot}/opt/%{name}
-%{__cp} %{_sourcedir}/%{name}-initscript %{buildroot}/etc/init.d/%{name}
+%{__cp} %{_sourcedir}/%{name}.service %{buildroot}/etc/systemd/system/
 
 %clean
 rm -rf %{buildroot}
@@ -109,33 +109,13 @@ case "$1" in
 esac
 
 %post
-case "$1" in
-  1)
-    # This is an initial install.
-    chkconfig --add %{name}
-  ;;
-  2)
-    # This is an upgrade.
-    # First delete the registered service.
-    chkconfig --del %{name}
-    # Then add the registered service. In case run levels changed in the init script, the service will be correctly re-added.
-    chkconfig --add %{name}
-  ;;
-esac
+%systemd_post %{name}.service
 
 %preun
-case "$1" in
-  0)
-    # This is an un-installation.
-    service %{name} stop
-    chkconfig --del %{name}
-  ;;
-  1)
-    # This is an upgrade.
-    # Do nothing.
-    :
-  ;;
-esac
+%systemd_preun %{name}.service
+
+%postun
+%systemd_postun_with_restart {name}.service 
 
 %files
 %defattr(-,tomcat,tomcat,-)
@@ -148,7 +128,7 @@ esac
 /opt/%{name}/pid
 %dir /opt/%{name}/webapps
 /var/run/%{name}
-%attr(0755,root,root) /etc/init.d/%{name}
+%attr(0644,root,root) /etc/systemd/system/%{name}.service
 
 %files manager
 /opt/%{name}/webapps/manager
