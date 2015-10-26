@@ -7,4 +7,4 @@ ls -l /etc/init.d/
 echo "==="
 ls -l /etc/rc.d/init.d/
 
-/etc/init.d/apache-tomcat start
+systemctl start apache-tomcat.service
