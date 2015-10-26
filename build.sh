@@ -59,13 +59,16 @@ readargs() {
 
 checkargs() {
   if [ ! "${directory}" ] ; then
-    echo "Missing argument."
-    exit 2
+    echo "Missing directory."
+    usage
   fi
  if [ ! "${specfile}" ] ; then
-    echo "Missing argument."
-    exit 2
+    echo "Missing specfile."
+    usage
   fi
+  if [ ! "${version}" ] ; then
+    echo "Missing version."
+    usage
 }
 
 setargs() {
