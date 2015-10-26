@@ -1,0 +1,11 @@
+[Unit]
+Description: Apache Tomcat
+After: network.target
+
+[Service]
+Type: forking
+ExecStart: su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh start" > /dev/null && touch /var/lock/apache-tomcat
+ExecStop:  su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh stop" > /dev/null && rm -f /var/lock/apache-tomcat
+
+[Install]
+WantedBy=multi-user.target
