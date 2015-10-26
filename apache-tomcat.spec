@@ -65,19 +65,17 @@ The host-manager web application of Apache Tomcat.
 %prep
 
 %setup -q -n %{name}-%{version}-src
-# This tells ant to install software in a specific directory.
 cat << EOF >> build.properties
+# This tells ant to install software in a specific directory.
 base.path=%{buildroot}/opt/%{name}
+# Building happens with java 1.6, but to make websockets work, java 1.7 needs to be available.
 java.7.home=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
 EOF
 
 %build
 update-alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk.x86_64/bin/java
-update-alternatives --display java_sdk_openjdk
 update-alternatives --set java_sdk_openjdk /usr/lib/jvm/java-1.6.0-openjdk.x86_64 
-update-alternatives --display javac
 update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk.x86_64/bin/javac
-update-alternatives --display jre_openjdk
 update-alternatives --set jre_openjdk /usr/lib/jvm/jre-1.6.0-openjdk.x86_64
 ant
 
