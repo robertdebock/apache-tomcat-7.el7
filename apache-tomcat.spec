@@ -67,7 +67,7 @@ The host-manager web application of Apache Tomcat.
 %setup -q -n %{name}-%{version}-src
 # This tells ant to install software in a specific directory.
 cat << EOF >> build.properties
-base.path=%{buildroot}/opt/apache-tomcat
+base.path=%{buildroot}/opt/%{name}
 java.7.home=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
 EOF
 
@@ -118,7 +118,7 @@ esac
 %systemd_postun_with_restart {name}.service 
 
 %files
-%defattr(-,tomcat,tomcat,-)
+%defattr(-,%{name},%{name},-)
 %dir /opt/%{name}
 %config /opt/%{name}/conf/*
 /opt/%{name}/bin
