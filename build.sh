@@ -46,7 +46,6 @@ readargs() {
           usage
         fi
       ;;
-
       *)
         echo "Unknown option or argument $1."
         echo
