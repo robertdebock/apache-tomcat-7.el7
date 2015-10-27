@@ -68,6 +68,7 @@ checkvalues() {
     echo "Package ${package} does not exist."
     echo
     usage
+  fi
 }
 
 main() {
