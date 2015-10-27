@@ -1,12 +1,10 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -d directory -s SPECfile"
+  echo "Usage: $0 -v VERSION"
   echo
-  echo "  -d DIRECTORY"
-  echo "    Directory where the SPECfile exists."
-  echo "  -s SPECfile"
-  echo "    The name of the RPM SPEC file."
+  echo "  -v VERSION" 
+  echo "    The version of the package, without the release number, i.e. 7.0.65" 
   exit 1
 }
 
@@ -24,7 +22,6 @@ readargs() {
           usage
         fi
       ;;
-
       *)
         echo "Unknown option or argument $1."
         echo
