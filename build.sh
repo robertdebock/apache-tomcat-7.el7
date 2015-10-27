@@ -1,11 +1,11 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -d directory -s SPECfile"
+  echo "Usage: $0 -d DIRECTORY -s SPECFILE -v VERSION"
   echo
   echo "  -d DIRECTORY"
   echo "    Directory where the SPECfile exists."
-  echo "  -s SPECfile"
+  echo "  -s SPECFILE"
   echo "    The name of the RPM SPEC file."
   echo "  -v VERSION"
   echo "    The version of the package, without the release number, i.e. 7.0.65"
