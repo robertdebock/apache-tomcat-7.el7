@@ -12,7 +12,7 @@ script:
 # Build the RPM(s).
 - docker run -v $(pwd):/data robertdebock/docker-centos-rpmbuild /bin/sh /data/build.sh -d /data -s ${PACKAGE}.spec -v ${VERSION}
 # Test the installation of the RPM.
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/test.sh
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/test.sh -v ${VERSION}
 
 notifications:
   email: false
