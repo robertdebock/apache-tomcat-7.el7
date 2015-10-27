@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 usage() {
   echo "Usage: $0 -d directory -s SPECfile"
@@ -7,6 +7,8 @@ usage() {
   echo "    Directory where the SPECfile exists."
   echo "  -s SPECfile"
   echo "    The name of the RPM SPEC file."
+  echo "  -v VERSION"
+  echo "    The version of the package, without the release number, i.e. 7.0.65"
   exit 1
 }
 
@@ -59,14 +61,17 @@ readargs() {
 checkargs() {
   if [ ! "${directory}" ] ; then
     echo "Missing directory."
+    echo
     usage
   fi
  if [ ! "${specfile}" ] ; then
     echo "Missing specfile."
+    echo
     usage
   fi
   if [ ! "${version}" ] ; then
     echo "Missing version."
+    echo
     usage
   fi
 }
