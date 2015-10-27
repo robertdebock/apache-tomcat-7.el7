@@ -69,6 +69,7 @@ checkargs() {
   if [ ! "${version}" ] ; then
     echo "Missing version."
     usage
+  fi
 }
 
 setargs() {
