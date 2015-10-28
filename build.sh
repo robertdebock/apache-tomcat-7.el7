@@ -94,6 +94,7 @@ checkvalues() {
 buildrpm() {
   chown root:root ${directory}/${specfile}
   mkdir -p ${directory}/rpmbuild/{RPMS,BUILD,SOURCES}
+  yum -y groupinstall "Development Tools"
   yum -y install wget ant java-1.6.0-openjdk java-1.6.0-openjdk-devel
   wget -P ${directory}/rpmbuild/SOURCES/ http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/apache-tomcat-${version}-src.tar.gz
   cp ${directory}/apache-tomcat.service ${directory}/rpmbuild/SOURCES/
