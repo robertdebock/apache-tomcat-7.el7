@@ -1,6 +1,6 @@
 # apache-tomcat-7-rpm
 
-[![Build Status](https://travis-ci.org/robertdebock/apache-tomcat-rpm.svg)](https://travis-ci.org/robertdebock/apache-tomcat-rpm)
+[![Build Status](https://travis-ci.org/robertdebock/apache-tomcat-7-rpm.svg?branch=master)](https://travis-ci.org/robertdebock/apache-tomcat-7-rpm)
 
 This repository contains sources of [Apache Tomcat 7](http://tomcat.apache.org) RPM's for [CentOS 7](https://www.centos.org/).
 
