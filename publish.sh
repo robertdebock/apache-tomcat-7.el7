@@ -1,10 +1,10 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -u FURYURL"
+  echo "Usage: $0 -u URL -p PACKAGE"
   echo
-  echo "  -u FURYURL" 
-  echo "    The URL to FURY as provided by FURY. (This includes credentials.)" 
+  echo "  -u URL" 
+  echo "    The URL to publish to."
   echo "  -p PACKAGE"
   echo "    The package (RPM) to upload."
   exit 1
@@ -15,7 +15,7 @@ readargs() {
     case "$1" in
       -u)
         if [ "$2" ] ; then
-          furyurl="$2"
+          url="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -47,7 +47,7 @@ readargs() {
 }
 
 checkargs() {
-  if [ ! "${furyurl}" ] ; then
+  if [ ! "${url}" ] ; then
     echo "Missing furyurl."
     echo
     usage
@@ -72,7 +72,7 @@ checkvalues() {
 }
 
 main() {
-  curl -F package=@${package} https://zPx1qa2AWzJmQGcH-L94@push.fury.io/meinitconsultancy/
+  curl -F package=@${package} ${url}
 }
 
 readargs "$@" 
