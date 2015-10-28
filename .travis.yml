@@ -10,11 +10,17 @@ env:
 
 script:
 # Build the RPM(s).
-- docker run -v $(pwd):/data robertdebock/docker-centos-rpmbuild /bin/sh /data/build.sh -d /data -s ${PACKAGE}.spec -v ${VERSION}
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/build.sh -d /data -s ${PACKAGE}.spec -v ${VERSION}
 # Test the installation of the RPM.
 - docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/test.sh -v ${VERSION}
 # Publish the RPM.
 - docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-debuginfo-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-manager-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-ROOT-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-docs-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-examples-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-host-manager-${VERSION}-1.x86_64.rpm
 
 notifications:
   email: false
