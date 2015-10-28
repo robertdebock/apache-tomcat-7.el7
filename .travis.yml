@@ -14,13 +14,14 @@ script:
 # Test the installation of the RPM.
 - docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/test.sh -v ${VERSION}
 # Publish the RPM.
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-1.x86_64.rpm
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-debuginfo-${VERSION}-1.x86_64.rpm
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-manager-${VERSION}-1.x86_64.rpm
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-ROOT-${VERSION}-1.x86_64.rpm
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-docs-${VERSION}-1.x86_64.rpm
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-examples-${VERSION}-1.x86_64.rpm
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${FURYURL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-host-manager-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-1.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-1.noarch.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-1.noarch.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-1.noarch.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-1.noarch.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-1.noarch.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-debuginfo-${VERSION}-1.noarch.rpm
+
 
 notifications:
   email: false
