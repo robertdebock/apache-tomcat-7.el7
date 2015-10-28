@@ -8,7 +8,7 @@ This repository contains sources of [Apache Tomcat 7](http://tomcat.apache.org) 
 
 The RPMs are published to [Gemfury](https://gemfury.com/robertdebock). To use these packages, add this repository:
 
-    [fury]
+    [robertdebock]
     name=Robert de Bock
     baseurl=https://repo.fury.io/robertdebock/
     enabled=1
