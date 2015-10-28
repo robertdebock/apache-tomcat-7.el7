@@ -20,7 +20,6 @@ script:
 - docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-1.el7.noarch.rpm
 - docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-1.el7.noarch.rpm
 - docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-1.el7.noarch.rpm
-- docker run -v $(pwd):/data robertdebock/docker-centos /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-debuginfo-${VERSION}-1.el7.x86_64.rpm
 
 notifications:
   email: false
