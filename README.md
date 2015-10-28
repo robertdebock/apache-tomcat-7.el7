@@ -1,4 +1,4 @@
-# apache-tomcat-rpm
+# apache-tomcat-7-rpm
 
 [![Build Status](https://travis-ci.org/robertdebock/apache-tomcat-rpm.svg)](https://travis-ci.org/robertdebock/apache-tomcat-rpm)
 
