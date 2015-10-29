@@ -144,6 +144,8 @@ esac
 /opt/%{name}/webapps/host-manager
 
 %changelog
+* Thu Oct 29 2015 - robert (at) meinit.nl
+- Cleaned up the RPM a bit.
 * Fri Oct 23 2015 - robert (at) meinit.nl
 - Changed apache-tomcat for %{name} and changed %pre logic.
 * Thu Oct 22 2015 - robert (at) meinit.nl
