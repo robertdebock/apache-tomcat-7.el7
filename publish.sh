@@ -58,7 +58,7 @@ checkargs() {
     usage
   fi
   regex='^(?!(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|])'
-  if [[ ${URL} ! =~ $regex ]] ; then
+  if [[ ${URL} =~ $regex ]] ; then
     echo "URL ${URL} is not a valid URL."
     echo
     usage
