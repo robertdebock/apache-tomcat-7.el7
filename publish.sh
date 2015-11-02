@@ -57,6 +57,11 @@ checkargs() {
     echo
     usage
   fi
+    if [[ ${URL} ! =~ $regex ]]
+    echo "URL ${URL} is not a valid URL."
+    echo
+    usage
+  fi
 }
 
 setargs() {
