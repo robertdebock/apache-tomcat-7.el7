@@ -1,6 +1,6 @@
 Name: apache-tomcat
 Version: 7.0.65
-Release: 1.el7
+Release: 2.el7
 Summary: Open source software implementation of the Java Servlet and JavaServer Pages technologies.
 Group: Productivity/Networking/Web/Servers
 License: Apache Software License.
