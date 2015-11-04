@@ -15,7 +15,7 @@ script:
 # Prepare the SPEC file with the correct version information.
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/prepare.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 # Build the RPM(s).
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -d ${DIR} -s ${PACKAGE}.spec -v ${VERSION}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -d ${DIR} -s ${PACKAGE}.spec
 # Test the installation of the RPM.
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/test.sh
 # Publish the RPM.
