@@ -14,7 +14,7 @@ script:
 # Test the installation of the RPM.
 - docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/test.sh
 # Publish the RPM.
-- docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-1.el7.x86_64.rpm
+- docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/x86_64/${PACKAGE}-?.*.x86_64.rpm
 - docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-1.el7.noarch.rpm
 - docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-1.el7.noarch.rpm
 - docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/publish.sh -u ${URL} -p /data/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-1.el7.noarch.rpm
