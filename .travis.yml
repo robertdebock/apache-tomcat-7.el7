@@ -7,8 +7,12 @@ env:
   global:
     - PACKAGE="apache-tomcat"
     - VERSION="7.0.65"
+    - RELEASE="1"
+    - DIST="el7"
 
 script:
+# Prepare the SPEC file with the correct version information.
+- docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/prepare.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 # Build the RPM(s).
 - docker run -v $(pwd):/data robertdebock/docker-centos7 /bin/sh /data/build.sh -d /data -s ${PACKAGE}.spec -v ${VERSION}
 # Test the installation of the RPM.
