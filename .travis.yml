@@ -17,8 +17,8 @@ script:
 # Build the RPM(s).
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -d ${DIR} -s ${PACKAGE}.spec
 # Test the installation of the RPM.
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/test.sh
-# Publish the RPM.
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/test.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
+# Publish the RPM. The $URL variable is stored in Travis-CI. (it's private...)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
