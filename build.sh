@@ -7,8 +7,6 @@ usage() {
   echo "    Directory where the SPECfile exists."
   echo "  -s SPECFILE"
   echo "    The name of the RPM SPEC file."
-  echo "  -v VERSION"
-  echo "    The version of the package, without the release number, i.e. 7.0.65"
   exit 1
 }
 
@@ -37,17 +35,6 @@ readargs() {
           usage
         fi
       ;;
-      -v)
-        if [ "$2" ] ; then
-          version="$2"
-          shift ; shift
-        else
-          echo "Missing a value for $1."
-          echo
-          shift
-          usage
-        fi
-      ;;
       *)
         echo "Unknown option or argument $1."
         echo
@@ -66,11 +53,6 @@ checkargs() {
   fi
  if [ ! "${specfile}" ] ; then
     echo "Missing specfile."
-    echo
-    usage
-  fi
-  if [ ! "${version}" ] ; then
-    echo "Missing version."
     echo
     usage
   fi
