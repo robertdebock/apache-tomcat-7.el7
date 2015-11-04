@@ -105,6 +105,7 @@ checkvalues() {
 main() {
   # Get source code
   cd /data
+  echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
   curl -O http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
   # Change SPEC file
   sed -i 's/Version: .*/Version: '${version}'/' /data/${package}.spec
