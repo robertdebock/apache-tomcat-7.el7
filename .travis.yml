@@ -10,21 +10,21 @@ env:
     - RELEASE="1"
     - DIST="el7"
     - DIR="/data"
-
+    - CONTAINER="robertdebock/docker-centos7"
 script:
 # Prepare the SPEC file with the correct version information.
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/prepare.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/prepare.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 # Build the RPM(s).
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/build.sh -d ${DIR} -s ${PACKAGE}.spec -v ${VERSION}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -d ${DIR} -s ${PACKAGE}.spec -v ${VERSION}
 # Test the installation of the RPM.
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/test.sh
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/test.sh
 # Publish the RPM.
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} robertdebock/docker-centos7 /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 
 notifications:
   email: false
