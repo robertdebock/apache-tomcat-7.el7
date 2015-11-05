@@ -94,27 +94,15 @@ checkargs() {
   fi
 }
 
-setargs() {
-  :
-}
-
-checkvalues() {
-  :
-}
-
 main() {
-  # Get source code
   cd /data
   echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
   curl -s -O http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
   echo "Done downloading."
-  # Change SPEC file
   sed -i 's/Version: .*/Version: '${version}'/' /data/${package}.spec
   sed -i 's/Release: .*/Release: '${release}.${dist}'/' /data/${package}.spec
 }
 
 readargs "$@"
 checkargs
-setargs
-checkvalues
 main
