@@ -97,6 +97,7 @@ checkargs() {
 main() {
   if [ -d /data ] ; then
     cd /data
+    mkdir -p rpmbuild/{RPMS,BUILD,SOURCES}
   else
     echo "Directory /data does not exit."
     echo
@@ -105,7 +106,7 @@ main() {
   which curl > /dev/null 2>&1
   if [ $? = 0 ] ; then
     echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
-    curl -s -O http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
+    curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
     echo "Done downloading."
   else
     echo "The program curl is missing."
