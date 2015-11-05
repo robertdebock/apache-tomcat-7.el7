@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/robertdebock/apache-tomcat-7.el7.svg?branch=master)](https://travis-ci.org/robertdebock/apache-tomcat-7.el7)
 
-This repository contains sources of [Apache Tomcat 7](http://tomcat.apache.org) RPM's for [CentOS 7](https://www.centos.org/).
+This repository contains sources of [Apache Tomcat 7](http://tomcat.apache.org) RPM's for [CentOS 7](https://www.centos.org/), [Red Hat 7](http://www.redhat.com/) or [Fedora](https://getfedora.org/).
 
 [Travis-CI](https://travis-ci.org/robertdebock/apache-tomcat-rpm) is being used to build, test and publish the RPM.
 
