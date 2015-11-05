@@ -102,5 +102,5 @@ main() {
 }
 
 readargs "$@"
-checkvalues
+checkargs
 main
