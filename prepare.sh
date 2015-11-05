@@ -95,12 +95,31 @@ checkargs() {
 }
 
 main() {
-  cd /data
-  echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
-  curl -s -O http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
-  echo "Done downloading."
-  sed -i 's/Version: .*/Version: '${version}'/' /data/${package}.spec
-  sed -i 's/Release: .*/Release: '${release}.${dist}'/' /data/${package}.spec
+  if [ -d /data ] ; then
+    cd /data
+  else
+    echo "Directory /data does not exit."
+    echo
+    exit 1
+  fi
+  which curl > /dev/null 2>&1
+  if [ $? = 0 ] ; then
+    echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
+    curl -s -O http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
+    echo "Done downloading."
+  else
+    echo "The program curl is missing."
+    echo
+    exit 2
+  fi
+  if [ -f /data/${pacakge}.spec ] ; then
+    sed -i 's/Version: .*/Version: '${version}'/' /data/${package}.spec
+    sed -i 's/Release: .*/Release: '${release}.${dist}'/' /data/${package}.spec
+  else
+    echo "The file /data/${pacakge}.spec does not exist."
+    echo
+    exit 3
+  fi
 }
 
 readargs "$@"
