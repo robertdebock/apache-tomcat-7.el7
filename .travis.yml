@@ -14,7 +14,7 @@ env:
     
 script:
 # Build the RPM(s).
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/buils.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 # Test the installation of the RPM.
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/test.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 # Publish the RPM. The $URL variable is stored in Travis-CI. (it's private...)
