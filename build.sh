@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -d DIRECTORY -s SPECFILE -v VERSION"
+  echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE -d DIST"
   echo
   echo "  -p PACKAGE"
   echo "    The name of the package, like \"apache-tomcat\"."
@@ -121,7 +121,7 @@ main() {
     echo
     exit 3
   fi
-  chown root:root ${directory}/${specfile}
+  chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
   yum -y install  ant java-1.6.0-openjdk java-1.6.0-openjdk-devel
   cp /data/${package}.service /data/rpmbuild/SOURCES/
