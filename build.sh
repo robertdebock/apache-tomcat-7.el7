@@ -75,7 +75,6 @@ checkvalues() {
 
 buildrpm() {
   chown root:root ${directory}/${specfile}
-  mkdir -p ${directory}/rpmbuild/{RPMS,BUILD,SOURCES}
   yum -y groupinstall "Development Tools"
   yum -y install  ant java-1.6.0-openjdk java-1.6.0-openjdk-devel
   cp ${directory}/apache-tomcat.service ${directory}/rpmbuild/SOURCES/
