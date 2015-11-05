@@ -10,7 +10,8 @@ env:
     - RELEASE="1"
     - DIST="el7"
     - DIR="/data"
-    - CONTAINER="robertdebock/docker-centos7"
+    - CONTAINER="centos:6.7"
+    
 script:
 # Prepare the SPEC file with the correct version information.
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/prepare.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
