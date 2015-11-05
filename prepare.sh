@@ -113,11 +113,11 @@ main() {
     echo
     exit 2
   fi
-  if [ -f /data/${pacakge}.spec ] ; then
+  if [ -f /data/${package}.spec ] ; then
     sed -i 's/Version: .*/Version: '${version}'/' /data/${package}.spec
     sed -i 's/Release: .*/Release: '${release}.${dist}'/' /data/${package}.spec
   else
-    echo "The file /data/${pacakge}.spec does not exist."
+    echo "The file /data/${package}.spec does not exist."
     echo
     exit 3
   fi
