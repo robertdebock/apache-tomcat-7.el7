@@ -10,7 +10,7 @@ env:
     - RELEASE="1"
     - DIST="el7"
     - DIR="/data"
-    - CONTAINER="centos:6.7"
+    - CONTAINER="centos:7"
     
 script:
 # Prepare the SPEC file with the correct version information.
