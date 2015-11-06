@@ -86,4 +86,3 @@ checkargs
 setargs 
 checkvalues 
 main
-makerepo
