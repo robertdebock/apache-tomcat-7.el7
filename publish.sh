@@ -83,10 +83,10 @@ main() {
 
 makerepo() {
   yum -y install createrepo
-  mkdir /data/repo
-  cp /data/rpmbuild/RPMS/x86_64/* /data/repo/
-  cp /data/rpmbuild/RPMS/noarch/* /data/repo/
-  cd /data/repo
+  mkdir /data/repository/
+  cp /data/rpmbuild/RPMS/x86_64/* /data/repository/
+  cp /data/rpmbuild/RPMS/noarch/* /data/repository/
+  cd /data/repository/
   createrepo .
   ls -la
 }
