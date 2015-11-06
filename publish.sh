@@ -81,8 +81,19 @@ main() {
   curl -F package=@${package} ${url}
 }
 
+makerepo() {
+  yum -y install createrepo
+  mkdir /data/repo
+  cp /data/rpmbuild/RPMS/x86_64/* /data/repo/
+  cp /data/rpmbuild/RPMS/noarch/* /data/repo/
+  cd /data/repo
+  createrepo .
+  ls -la
+}
+
 readargs "$@" 
 checkargs 
 setargs 
 checkvalues 
 main
+makerepo
