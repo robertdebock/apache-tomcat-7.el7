@@ -1,0 +1,5 @@
+[robertdebock]
+name=Robert de Bock
+baseurl=https://repo.fury.io/robertdebock/
+enabled=1
+gpgcheck=0
