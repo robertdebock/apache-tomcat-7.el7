@@ -94,6 +94,7 @@ s3() {
   s3Key=${s3key}
   s3Secret=${secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
+  echo ${s3key}
   curl -k -X PUT -T "${file}" \
     -H "Host: ${bucket}.s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
