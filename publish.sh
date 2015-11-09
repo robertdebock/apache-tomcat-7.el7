@@ -82,6 +82,7 @@ gemfury() {
 }
 
 s3() {
+  yum -y install openssl
   file=/data/rpmbuild/RPMS/x86_64/${package} 
   bucket=apache-tomcat7.el7 
   region=eu-west-1
