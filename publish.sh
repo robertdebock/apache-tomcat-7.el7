@@ -39,7 +39,7 @@ readargs() {
           usage
         fi
       ;;
-      -s)
+      -k)
         if [ "$2" ] ; then
           s3key="$2"
           shift ; shift
