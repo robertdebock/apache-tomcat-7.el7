@@ -7,6 +7,10 @@ usage() {
   echo "    The URL to publish to."
   echo "  -p PACKAGE"
   echo "    The package (RPM) to upload."
+  echo "  -k S3KEY"
+  echo "    The Amazon key to use."
+  echo "  -s S3SECRET"
+  echo "    The secret for the Amazon key."
   exit 1
 }
 
@@ -35,7 +39,28 @@ readargs() {
           usage
         fi
       ;;
-
+      -s)
+        if [ "$2" ] ; then
+          s3key="$2"
+          shift ; shift
+        else
+          echo "Missing a value for $1."
+          echo
+          shift
+          usage
+        fi
+      ;;
+      -s)
+        if [ "$2" ] ; then
+          s3secret="$2"
+          shift ; shift
+        else
+          echo "Missing a value for $1."
+          echo
+          shift
+          usage
+        fi
+      ;;
       *)
         echo "Unknown option or argument $1."
         echo
@@ -63,6 +88,16 @@ checkargs() {
     echo
     usage
   fi
+  if [ ! "${s3key}" ] ; then
+    echo "Missing Amazon S3 Key."
+    echo
+    usage
+  fi
+  if [ ! "${secret}" ] ; then
+    echo "Missing Amazon S3 Secret."
+    echo
+    usage
+  fi
 }
 
 setargs() {
@@ -83,7 +118,7 @@ gemfury() {
   echo "Done."
 }
 
-s3() {
+amazons3() {
   yum -y install openssl
   file=${package} 
   bucket=apache-tomcat7.el7 
@@ -94,10 +129,9 @@ s3() {
   stringToSign="PUT\n\n${contentType}\n${dateValue}\n${resource}"
   # These variables are stored in Travis.
   s3Key=${s3key}
-  s3Secret=${secret}
+  s3Secret=${s3secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
-  echo ${s3key}
-  echo "Sending ${package} to Amazon S3 with key: ${s3key} ..."
+  echo "Sending ${package} to Amazon S3..."
   curl -k -X PUT -T "${file}" \
     -H "Host: ${bucket}.s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
@@ -112,4 +146,4 @@ checkargs
 setargs 
 checkvalues 
 gemfury
-s3
+amazons3
