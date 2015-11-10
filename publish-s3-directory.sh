@@ -110,7 +110,7 @@ publish() {
     s3Secret=${s3secret}
     signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
     echo "Sending ${sourcedirectory}/${file} to Amazon S3 (${destinationdirectory})"
-    curl -k -X PUT -T "${file}" \
+    curl -k -X PUT -T "${sourcedirectory}/${file}" \
       -H "Host: ${bucket}.s3.amazonaws.com" \
       -H "Date: ${dateValue}" \
       -H "Content-Type: ${contentType}" \
