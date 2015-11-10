@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -u URL -p PACKAGE"
+  echo "Usage: $0 -u URL -p PACKAGE -k S3KEY -s S3SECRET"
   echo
   echo "  -u URL" 
   echo "    The URL to publish to."
