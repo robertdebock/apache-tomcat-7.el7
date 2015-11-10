@@ -93,7 +93,7 @@ checkargs() {
     echo
     usage
   fi
-  if [ ! "${secret}" ] ; then
+  if [ ! "${s3secret}" ] ; then
     echo "Missing Amazon S3 Secret."
     echo
     usage
