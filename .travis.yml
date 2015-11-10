@@ -15,17 +15,28 @@ env:
 script:
 # Build the RPM(s).
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
+
 # Test the installation of the RPM.
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/test.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
-# Create a repository. (Can be used to publish to i.e. openshift.
+
+# Create a repository. (Can be used to publish to i.e. Amazon S3)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/createrepo.sh
+
 # Publish the RPM. The $URL variable is stored in Travis-CI. (it's private...)
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+
+# Publish the results to Amazon S3. The $S3KEY and S3SECRET are stored in Travis-CI. (It's private...)
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 
 notifications:
   email: false
