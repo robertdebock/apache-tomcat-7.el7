@@ -1,10 +1,12 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -d DIRECTORY -k S3KEY -s S3SECRET"
+  echo "Usage: $0 -S SOURCEDIRECTORY -d DESTINATIONDIRECTORY -k S3KEY -s S3SECRET"
   echo
-  echo "  -d DIRECTORY"
-  echo "    The package (RPM) to upload."
+  echo "  -s SOURCEDIRECTORY"
+  echo "    The directory where files live."
+  echo "  -d DESTINATIONDIRECTORY"
+  echo "    The destination directory on S3."
   echo "  -k S3KEY"
   echo "    The Amazon key to use."
   echo "  -s S3SECRET"
@@ -15,9 +17,20 @@ usage() {
 readargs() {
   while [ "$#" -gt 0 ] ; do
     case "$1" in
+      -S)
+        if [ "$2" ] ; then
+          sourcedirectory="$2"
+          shift ; shift
+        else
+          echo "Missing a value for $1."
+          echo
+          shift
+          usage
+        fi
+      ;;
       -d)
         if [ "$2" ] ; then
-          directory="$2"
+          destinationdirectory="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -59,11 +72,12 @@ readargs() {
 }
 
 checkargs() {
-  if [ ! "${directory}" ] ; then
-    echo "Missing directory."
+  if [ ! "${sourcedirectory}" ] ; then
+    echo "Missing source directory."
     echo
     usage
   fi
+
   if [ ! "${s3key}" ] ; then
     echo "Missing Amazon S3 Key."
     echo
@@ -76,20 +90,18 @@ checkargs() {
   fi
 }
 
-checkvalues() {
-  if [ ! -d ${directory} ] ; then
-    echo "Directory ${directory} does not exist."
-    echo
-    usage
+setargs() {
+  if [ ! "${destinationdirectory}" ] ; then
+    destinationdirectory="${sourcedirectory}"
   fi
 }
 
 publish() {
   yum -y install openssl
-  for file in $(ls $directory) ; do
+  for file in $(ls $sourcedirectory) ; do
     bucket=apache-tomcat7.el7 
     region=eu-west-1
-    resource="/${bucket}/${directory}/${file}"
+    resource="/${bucket}/${destinationdirectory}/${file}"
     contentType="application/x-compressed-tar"
     dateValue=`date -R`
     stringToSign="PUT\n\n${contentType}\n${dateValue}\n${resource}"
@@ -97,18 +109,17 @@ publish() {
     s3Key=${s3key}
     s3Secret=${s3secret}
     signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
-    echo "Sending ${directory}/${file} to Amazon S3..."
+    echo "Sending ${sourcedirectory}/${file} to Amazon S3 (${destinationdirectory})"
     curl -k -X PUT -T "${file}" \
       -H "Host: ${bucket}.s3.amazonaws.com" \
       -H "Date: ${dateValue}" \
       -H "Content-Type: ${contentType}" \
       -H "Authorization: AWS ${s3Key}:${signature}" \
-      https://${bucket}.s3-${region}.amazonaws.com/${directory}${file}
+      https://${bucket}.s3-${region}.amazonaws.com/${destinationdirectory}/${file}
     echo "Done."
   done
 }
 
 readargs "$@"
 checkargs 
-checkvalues 
 publish
