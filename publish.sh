@@ -78,7 +78,9 @@ checkvalues() {
 }
 
 gemfury() {
+  echo "Sending ${package} to GemFury..."
   curl -F package=@${package} ${url}
+  echo "Done."
 }
 
 s3() {
@@ -95,12 +97,14 @@ s3() {
   s3Secret=${secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
   echo ${s3key}
+  echo "Sending ${package} to Amazon S3..."
   curl -k -X PUT -T "${file}" \
     -H "Host: ${bucket}.s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
     -H "Content-Type: ${contentType}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
     https://${bucket}.s3-${region}.amazonaws.com/${file}
+  echo "Done."
 }
 
 readargs "$@"
