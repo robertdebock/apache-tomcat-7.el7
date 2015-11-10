@@ -22,7 +22,7 @@ script:
 # Create a repository. (Can be used to publish to i.e. Amazon S3)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/createrepo.sh
 
-# Publish the RPM. The $URL variable is stored in Travis-CI. (it's private...)
+# Publish the results to Gemfury. The $URL variable is stored in Travis-CI. (it's private...)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
@@ -38,5 +38,7 @@ script:
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 
+# Publish the "repodata" to Amazon S3.
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3-directory.sh -k ${S3KEY} -s ${S3SECRET} -s ${DIR}/repository/repodata -d repodata
 notifications:
   email: false
