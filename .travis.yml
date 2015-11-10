@@ -23,12 +23,12 @@ script:
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/createrepo.sh
 
 # Publish the RPM. The $URL variable is stored in Travis-CI. (it's private...)
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-ROOT-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-docs-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-examples-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 
 # Publish the results to Amazon S3. The $S3KEY and S3SECRET are stored in Travis-CI. (It's private...)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
