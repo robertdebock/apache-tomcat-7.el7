@@ -87,6 +87,7 @@ checkvalues() {
 publish() {
   yum -y install openssl
   file=$(basename ${package})
+  directory=$(dirname ${package})
   bucket=apache-tomcat7.el7 
   region=eu-west-1
   resource="/${bucket}/${file}"
@@ -97,7 +98,8 @@ publish() {
   s3Key=${s3key}
   s3Secret=${s3secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
-  echo "Sending ${package} to Amazon S3..."
+  echo "Sending ${directory}/${file} to Amazon S3..."
+  cd ${directory}
   curl -k -X PUT -T "${file}" \
     -H "Host: ${bucket}.s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
