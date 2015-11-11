@@ -39,7 +39,7 @@ script:
 #- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 
 # Delete something (as a test) from Amazon S3.
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh -x ${DIR}/delete-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh -x ${DIR}/delete-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -f ${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
 
 # Publish the "repodata" to Amazon S3.
 #- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3-directory.sh -k ${S3KEY} -s ${S3SECRET} -S ${DIR}/repository/repodata -d repodata
