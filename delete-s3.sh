@@ -115,7 +115,7 @@ checkargs() {
 
 publish() {
   yum -y install openssl
-  resource="/${bucket}/${file}"
+  resource="${bucket}/${file}"
   dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
   # These variables are stored in Travis.
@@ -128,7 +128,7 @@ publish() {
     -H "Host: s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
-    https://s3.amazonaws.com/${resource}
+    https://${bucket}.s3.amazonaws.com/${resource}
 }
 
 readargs "$@"
