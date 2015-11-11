@@ -85,7 +85,7 @@ publish() {
   resource="/${bucket}/${file}"
   contentType="application/x-compressed-tar"
   dateValue=`date -R`
-  stringToSign="DELETE\n\n${contentType}\n${dateValue}\n${resource}"
+  stringToSign="DELETE\n\n${dateValue}\n${resource}"
   # These variables are stored in Travis.
   s3Key=${s3key}
   s3Secret=${s3secret}
