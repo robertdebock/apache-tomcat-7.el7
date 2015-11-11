@@ -1,15 +1,10 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -r REGION -b BUCKET -f FILE -k S3KEY -s S3SECRET"
+  echo "Usage: $0 -p PACKAGE -k S3KEY -s S3SECRET"
   echo
-  echo "  -r REGION"
-  echo "    The Amazon S3 Region, i.e. eu-west-1"
-  echo "  -b BUCKET"
-  echo "    The Amazon S3 Bucket to work in."
-  echo "  -f FILE"
-  echo "    The file to delete, including a path in S3, without a starting /."
-  echo "    i.e. photos/puppy.jpg"
+  echo "  -p PACKAGE"
+  echo "    The package (RPM) to upload."
   echo "  -k S3KEY"
   echo "    The Amazon key to use."
   echo "  -s S3SECRET"
@@ -20,31 +15,9 @@ usage() {
 readargs() {
   while [ "$#" -gt 0 ] ; do
     case "$1" in
-      -r)
+      -p)
         if [ "$2" ] ; then
-          region="$2"
-          shift ; shift
-        else
-          echo "Missing a value for $1."
-          echo
-          shift
-          usage
-        fi
-      ;;
-      -b)
-        if [ "$2" ] ; then
-          bucket="$2"
-          shift ; shift
-        else
-          echo "Missing a value for $1."
-          echo
-          shift
-          usage
-        fi
-      ;;
-      -f)
-        if [ "$2" ] ; then
-          file="$2"
+          package="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -86,18 +59,8 @@ readargs() {
 }
 
 checkargs() {
-  if [ ! "${region}" ] ; then
-    echo "Missing region."
-    echo
-    usage
-  fi
-  if [ ! "${bucket}" ] ; then
-    echo "Missing bucket."
-    echo
-    usage
-  fi
-  if [ ! "${file}" ] ; then
-    echo "Missing file."
+  if [ ! "${package}" ] ; then
+    echo "Missing package."
     echo
     usage
   fi
@@ -113,24 +76,40 @@ checkargs() {
   fi
 }
 
+checkvalues() {
+  if [ ! -f ${package} ] ; then
+    echo "Package ${package} does not exist."
+    echo
+    usage
+  fi
+}
+
 publish() {
   yum -y install openssl
+  file=$(basename ${package})
+  directory=$(dirname ${package})
+  bucket=apache-tomcat7.el7 
+  region=eu-west-1
   resource="/${bucket}/${file}"
-  dateValue=$(date -R)
-  stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
+  contentType="application/x-compressed-tar"
+  dateValue=`date -R`
+  stringToSign="PUT\n\n${contentType}\n${dateValue}\n${resource}"
   # These variables are stored in Travis.
   s3Key=${s3key}
   s3Secret=${s3secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
-  echo "Deleting ${resource} from Amazon S3..."
-  curl -k -X POST \
-    -H "DELETE ${resource} HTTP/1.1" \
-    -H "Host: s3.amazonaws.com" \
+  echo "Sending ${directory}/${file} to Amazon S3..."
+  cd ${directory}
+  curl -k -X PUT -T "${file}" \
+    -H "Host: ${bucket}.s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
+    -H "Content-Type: ${contentType}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
-    https://s3.amazonaws.com/${resource}
+    https://${bucket}.s3-${region}.amazonaws.com/${file}
+  echo "Done."
 }
 
 readargs "$@"
 checkargs 
+checkvalues 
 publish
