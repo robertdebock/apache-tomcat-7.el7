@@ -96,7 +96,7 @@ publish() {
   s3Secret=${s3secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
   echo "Deleting ${directory}${file} from Amazon S3..."
-  curl -k -X POST \
+  curl -k -X DELETE \
     -H "DELETE ${directory}${file} HTTP/1.1" \
     -H "Host: s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
