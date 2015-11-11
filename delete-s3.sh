@@ -80,11 +80,14 @@ publish() {
   yum -y install openssl
   file=$(basename ${package})
   directory=$(dirname ${package})
+  if [ ${directory} = "." ] ;then
+    directory=""
+  fi
   bucket=apache-tomcat7.el7 
   region=eu-west-1
   resource="/${bucket}/${file}"
   contentType="application/x-compressed-tar"
-  dateValue=`date -R`
+  dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
   # These variables are stored in Travis.
   s3Key=${s3key}
