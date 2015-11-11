@@ -121,7 +121,7 @@ delete() {
   # These variables are stored in Travis.
   s3Key=${s3key}
   s3Secret=${s3secret}
-  signature=$(echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64)
+  signature=$(echo -en "${stringToSign}" | openssl sha1 -hmac ${s3Secret} -binary | base64)
   echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
   curl -k -X POST \
     -H "DELETE ${resource} HTTP/1.1" \
