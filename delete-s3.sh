@@ -125,7 +125,7 @@ publish() {
   echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
   curl -k -X POST \
     -H "DELETE ${resource} HTTP/1.1" \
-    -H "Host: s3.amazonaws.com" \
+    -H "Host: ${bucket}.s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
     https://${bucket}.s3.amazonaws.com/
