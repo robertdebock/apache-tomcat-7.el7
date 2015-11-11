@@ -105,7 +105,7 @@ publish() {
     -H "Host: s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
-    https://${bucket}.s3-${region}.amazonaws.com/${directory}/${file}
+    https://s3-${region}.amazonaws.com/${directory}/${file}
   echo "Done."
 }
 
