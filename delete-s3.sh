@@ -125,8 +125,10 @@ delete() {
   echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
   curl -k -X POST \
     -H "DELETE ${resource} HTTP/1.1" \
+    -H "User-Agent: delete-s3.sh" \
     -H "Host: s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
+    -H "x-amz-date: ${dateValue}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
     https://${bucket}.s3.amazonaws.com/
 }
