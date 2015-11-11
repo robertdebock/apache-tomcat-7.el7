@@ -123,7 +123,7 @@ delete() {
   s3Secret=${s3secret}
   signature=$(echo -en "${stringToSign}" | openssl sha1 -hmac ${s3Secret} -binary | base64)
   echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
-  curl -k -X POST \
+  curl -k -X DELETE \
     -H "DELETE ${resource} HTTP/1.1" \
     -H "User-Agent: delete-s3.sh" \
     -H "Host: s3.amazonaws.com" \
