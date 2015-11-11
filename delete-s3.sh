@@ -76,14 +76,6 @@ checkargs() {
   fi
 }
 
-checkvalues() {
-  if [ ! -f ${package} ] ; then
-    echo "Package ${package} does not exist."
-    echo
-    usage
-  fi
-}
-
 publish() {
   yum -y install openssl
   file=$(basename ${package})
@@ -111,5 +103,4 @@ publish() {
 
 readargs "$@"
 checkargs 
-checkvalues 
 publish
