@@ -91,7 +91,6 @@ publish() {
   s3Secret=${s3secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
   echo "Sending ${directory}/${file} to Amazon S3..."
-  cd ${directory}
   curl -k -X POST \
     -H "DELETE ${directory}/${file} HTTP/1.1" \
     -H "Host: s3.amazonaws.com" \
