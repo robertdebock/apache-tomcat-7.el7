@@ -115,14 +115,14 @@ checkargs() {
 
 publish() {
   yum -y install openssl
-  resource="${bucket}/${file}"
+  resource="/${bucket}/${file}"
   dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
   # These variables are stored in Travis.
   s3Key=${s3key}
   s3Secret=${s3secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
-  echo "Deleting ${resource} from Amazon S3..."
+  echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
   curl -k -X POST \
     -H "DELETE ${resource} HTTP/1.1" \
     -H "Host: s3.amazonaws.com" \
