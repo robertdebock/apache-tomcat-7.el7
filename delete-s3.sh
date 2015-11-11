@@ -101,7 +101,7 @@ publish() {
   echo "Sending ${directory}/${file} to Amazon S3..."
   cd ${directory}
   curl -k -X POST \
-    -H "DELETE ${directory}/${file} HTTP/1.1
+    -H "DELETE ${directory}/${file} HTTP/1.1" \
     -H "Host: ${bucket}.s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
