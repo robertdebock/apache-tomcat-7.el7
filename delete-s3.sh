@@ -82,6 +82,8 @@ publish() {
   directory=$(dirname ${package})
   if [ ${directory} = "." ] ;then
     directory=""
+  else
+    directory="${directory}/"
   fi
   bucket=apache-tomcat7.el7 
   region=eu-west-1
@@ -93,13 +95,13 @@ publish() {
   s3Key=${s3key}
   s3Secret=${s3secret}
   signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
-  echo "Deleting ${directory}/${file} from Amazon S3..."
+  echo "Deleting ${directory}${file} from Amazon S3..."
   curl -k -X POST \
-    -H "DELETE ${directory}/${file} HTTP/1.1" \
+    -H "DELETE ${directory}${file} HTTP/1.1" \
     -H "Host: s3.amazonaws.com" \
     -H "Date: ${dateValue}" \
     -H "Authorization: AWS ${s3Key}:${signature}" \
-    https://s3.amazonaws.com/${directory}/${file}
+    https://s3.amazonaws.com/${directory}${file}
   echo "Done."
 }
 
