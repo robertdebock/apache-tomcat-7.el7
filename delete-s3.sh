@@ -114,36 +114,10 @@ checkargs() {
 }
 
 delete() {
-  #yum -y install openssl
   yum -y install epel-release
   yum -y install python-pip
   pip install awscli
-  aws s3 ls s3://${bucket} 
-  
-#  resource="/${bucket}/${file}"
-#  dateValue=$(date -R)
-#  stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
-  # These variables are stored in Travis.
-#  s3Key=${AWS_ACCESS_KEY_ID}
-#  s3Secret=${AWS_SECRET_ACCESS_KEY}
-#  signature=$(echo -en "${stringToSign}" | openssl sha1 -hmac ${AWS_SECRET_ACCESS_KEY} -binary | base64)
-#  echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
-#  echo << EOF >> headers.txt
-#DELETE ${resource} HTTP/1.1
-#Host: ${bucket}.s3.amazonaws.com
-#Date: ${dateValue}
-#Authorization: AWS ${AWS_ACCESS_KEY_ID}:${signature}
-#Content-Type: text/plain
-#EOF
-#  curl -v -k -X DELETE -H "$(cat headers.txt)" https://${bucket}.s3.amazonaws.com
-  
-  #curl -k -X DELETE \
-  #  -H "DELETE ${resource} HTTP/1.1" \
-  #  -H "Host: ${bucket}.s3.amazonaws.com" \
-  #  -H "Date: ${dateValue}" \
-  #  -H "Authorization: AWS ${AWS_ACCESS_KEY_ID}:${signature}" \
-  #  -H "Content-Type: text/plain" \
-  #  https://${bucket}.s3.amazonaws.com
+  aws s3 rm s3://${bucket}/${file}
 }
 
 readargs "$@"
