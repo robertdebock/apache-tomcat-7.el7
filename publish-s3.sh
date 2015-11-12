@@ -1,15 +1,14 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -r REGION -b BUCKET -f FILE -k S3KEY -s S3SECRET"
+  echo "Usage: $0 -r REGION -b BUCKET -d DIRECTORY -k S3KEY -s S3SECRET"
   echo
   echo "  -r REGION"
   echo "    The Amazon S3 Region, i.e. eu-west-1"
   echo "  -b BUCKET"
   echo "    The Amazon S3 Bucket to work in."
-  echo "  -f FILE"
-  echo "    The file to delete, including a path in S3, without a starting /."
-  echo "    i.e. photos/puppy.jpg"
+  echo "  -d DIRECTORY"
+  echo "    The local directory to sync."
   echo "  -k S3KEY"
   echo "    The Amazon key to use."
   echo "  -s S3SECRET"
@@ -42,9 +41,9 @@ readargs() {
           usage
         fi
       ;;
-      -f)
+      -d)
         if [ "$2" ] ; then
-          file="$2"
+          directory="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -96,8 +95,8 @@ checkargs() {
     echo
     usage
   fi
-  if [ ! "${file}" ] ; then
-    echo "Missing file."
+  if [ ! "${directory}" ] ; then
+    echo "Missing directory."
     echo
     usage
   fi
@@ -117,7 +116,7 @@ delete() {
   yum -y install epel-release
   yum -y install python-pip
   pip install awscli
-  aws s3 sync /data/repository/ s3://${bucket}
+  aws s3 sync ${directory} s3://${bucket}
 }
 
 readargs "$@"
