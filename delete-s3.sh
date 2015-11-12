@@ -115,7 +115,7 @@ checkargs() {
 
 delete() {
   yum -y install openssl
-  yum -y search aws
+  pip install awscli
   resource="/${bucket}/${file}"
   dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
