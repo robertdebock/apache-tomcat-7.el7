@@ -123,7 +123,7 @@ delete() {
   s3Secret=${s3secret}
   signature=$(echo -en "${stringToSign}" | openssl sha1 -hmac ${s3Secret} -binary | base64)
   echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
-  echo << OEF >> headers.txt
+  echo << EOF >> headers.txt
 DELETE ${resource} HTTP/1.1
 Host: ${bucket}.s3.amazonaws.com
 Date: ${dateValue}
