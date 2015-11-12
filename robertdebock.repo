@@ -1,5 +1,5 @@
 [robertdebock]
 name=Robert de Bock
-baseurl=https://repo.fury.io/robertdebock/
+baseurl=https://s3-eu-west-1.amazonaws.com/apache-tomcat7.el7/
 enabled=1
 gpgcheck=0
