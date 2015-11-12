@@ -22,7 +22,7 @@ readargs() {
     case "$1" in
       -r)
         if [ "$2" ] ; then
-          AWS_DEFAULT_REGION="$2"
+          export AWS_DEFAULT_REGION="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -55,7 +55,7 @@ readargs() {
       ;;
       -k)
         if [ "$2" ] ; then
-          AWS_ACCESS_KEY_ID="$2"
+          export AWS_ACCESS_KEY_ID="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -66,7 +66,7 @@ readargs() {
       ;;
       -s)
         if [ "$2" ] ; then
-          AWS_SECRET_ACCESS_KEY="$2"
+          export AWS_SECRET_ACCESS_KEY="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
