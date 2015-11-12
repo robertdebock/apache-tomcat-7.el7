@@ -119,7 +119,7 @@ delete() {
   dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
   echo
-  echo ${stringToSign}
+  echo -en ${stringToSign}
   echo
   # These variables are stored in Travis.
   s3Key=${s3key}
