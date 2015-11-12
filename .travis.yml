@@ -14,13 +14,13 @@ env:
     
 script:
 # Build the RPM(s).
-#- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 
 # Test the installation of the RPM.
 #- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/test.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 
 # Create a repository. (Can be used to publish to i.e. Amazon S3)
-#- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/createrepo.sh
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/createrepo.sh
 
 # Publish the results to Gemfury. The $URL variable is stored in Travis-CI. (it's private...)
 #- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-gemfury.sh -u ${URL} -p ${DIR}/rpmbuild/RPMS/x86_64/${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
@@ -39,7 +39,7 @@ script:
 #- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -k ${S3KEY} -s ${S3SECRET} -p ${DIR}/rpmbuild/RPMS/noarch/${PACKAGE}-host-manager-${VERSION}-${RELEASE}.${DIST}.noarch.rpm
 
 # Delete something (as a test) from Amazon S3.
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/delete-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -f ${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -f ${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
 
 # Publish the "repodata" to Amazon S3.
 #- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3-directory.sh -k ${S3KEY} -s ${S3SECRET} -S ${DIR}/repository/repodata -d repodata
