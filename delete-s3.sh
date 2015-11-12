@@ -114,7 +114,7 @@ checkargs() {
 }
 
 delete() {
-  yum -y install openssl
+  yum -y install openssl s3cmd
   resource="/${bucket}/${file}"
   dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
