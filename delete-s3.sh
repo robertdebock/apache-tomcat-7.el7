@@ -118,21 +118,27 @@ delete() {
   resource="/${bucket}/${file}"
   dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
-  echo
-  echo -en ${stringToSign}
-  echo
   # These variables are stored in Travis.
   s3Key=${s3key}
   s3Secret=${s3secret}
   signature=$(echo -en "${stringToSign}" | openssl sha1 -hmac ${s3Secret} -binary | base64)
   echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
-  curl -k -X DELETE \
-    -H "DELETE ${resource} HTTP/1.1" \
-    -H "Host: ${bucket}.s3.amazonaws.com" \
-    -H "Date: ${dateValue}" \
-    -H "Authorization: AWS ${s3Key}:${signature}" \
-    -H "Content-Type: text/plain" \
-    https://${bucket}.s3.amazonaws.com
+  echo << OEF >> headers.txt
+DELETE ${resource} HTTP/1.1
+Host: ${bucket}.s3.amazonaws.com
+Date: ${dateValue}
+Authorization: AWS ${s3Key}:${signature}
+Content-Type: text/plain
+EOF
+  curl -v -k -H "$(cat headers.txt)" https://${bucket}.s3.amazonaws.com
+  
+  #curl -k -X DELETE \
+  #  -H "DELETE ${resource} HTTP/1.1" \
+  #  -H "Host: ${bucket}.s3.amazonaws.com" \
+  #  -H "Date: ${dateValue}" \
+  #  -H "Authorization: AWS ${s3Key}:${signature}" \
+  #  -H "Content-Type: text/plain" \
+  #  https://${bucket}.s3.amazonaws.com
 }
 
 readargs "$@"
