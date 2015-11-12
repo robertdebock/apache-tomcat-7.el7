@@ -130,7 +130,7 @@ Date: ${dateValue}
 Authorization: AWS ${s3Key}:${signature}
 Content-Type: text/plain
 EOF
-  curl -v -k -H "$(cat headers.txt)" https://${bucket}.s3.amazonaws.com
+  curl -v -k -X PUT -H "$(cat headers.txt)" https://${bucket}.s3.amazonaws.com
   
   #curl -k -X DELETE \
   #  -H "DELETE ${resource} HTTP/1.1" \
