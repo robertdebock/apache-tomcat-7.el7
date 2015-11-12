@@ -118,6 +118,9 @@ delete() {
   resource="/${bucket}/${file}"
   dateValue=$(date -R)
   stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
+  echo
+  echo ${stringToSign}
+  echo
   # These variables are stored in Travis.
   s3Key=${s3key}
   s3Secret=${s3secret}
