@@ -115,7 +115,7 @@ checkargs() {
 
 delete() {
   yum -y install openssl
-  yum -y install python
+  yum -y install python-pip
   pip install awscli
   resource="/${bucket}/${file}"
   dateValue=$(date -R)
