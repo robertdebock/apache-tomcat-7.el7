@@ -6,11 +6,11 @@ This repository contains sources of [Apache Tomcat 7](http://tomcat.apache.org) 
 
 [Travis-CI](https://travis-ci.org/robertdebock/apache-tomcat-7.el7) is being used to build, test and publish the RPM.
 
-The RPMs are published to [Gemfury](https://gemfury.com/robertdebock). To use these packages, copy this text into /etc/yum.repos.d/robertdebock.repo:
+The RPMs are available on [Amazon S3](https://s3-eu-west-1.amazonaws.com/apache-tomcat7.el7/). To use these packages, copy this text into /etc/yum.repos.d/robertdebock.repo:
 
     [robertdebock]
     name=Robert de Bock
-    baseurl=https://repo.fury.io/robertdebock/
+    baseurl=https://s3-eu-west-1.amazonaws.com/apache-tomcat7.el7/
     enabled=1
     gpgcheck=0
 
