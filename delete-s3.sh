@@ -22,7 +22,7 @@ readargs() {
     case "$1" in
       -r)
         if [ "$2" ] ; then
-          region="$2"
+          AWS_DEFAULT_REGION="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -55,7 +55,7 @@ readargs() {
       ;;
       -k)
         if [ "$2" ] ; then
-          s3key="$2"
+          AWS_ACCESS_KEY_ID="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -66,7 +66,7 @@ readargs() {
       ;;
       -s)
         if [ "$2" ] ; then
-          s3secret="$2"
+          AWS_SECRET_ACCESS_KEY="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -86,8 +86,8 @@ readargs() {
 }
 
 checkargs() {
-  if [ ! "${region}" ] ; then
-    echo "Missing region."
+  if [ ! "${AWS_DEFAULT_REGION}" ] ; then
+    echo "Missing AWS_DEFAULT_REGION."
     echo
     usage
   fi
@@ -101,12 +101,12 @@ checkargs() {
     echo
     usage
   fi
-  if [ ! "${s3key}" ] ; then
+  if [ ! "${AWS_ACCESS_KEY_ID}" ] ; then
     echo "Missing Amazon S3 Key."
     echo
     usage
   fi
-  if [ ! "${s3secret}" ] ; then
+  if [ ! "${AWS_SECRET_ACCESS_KEY}" ] ; then
     echo "Missing Amazon S3 Secret."
     echo
     usage
@@ -118,28 +118,30 @@ delete() {
   yum -y install epel-release
   yum -y install python-pip
   pip install awscli
-  resource="/${bucket}/${file}"
-  dateValue=$(date -R)
-  stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
+  aws s3 ls s3://${bucket} 
+  
+#  resource="/${bucket}/${file}"
+#  dateValue=$(date -R)
+#  stringToSign="DELETE\n\n\n${dateValue}\n${resource}"
   # These variables are stored in Travis.
-  s3Key=${s3key}
-  s3Secret=${s3secret}
-  signature=$(echo -en "${stringToSign}" | openssl sha1 -hmac ${s3Secret} -binary | base64)
-  echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
-  echo << EOF >> headers.txt
-DELETE ${resource} HTTP/1.1
-Host: ${bucket}.s3.amazonaws.com
-Date: ${dateValue}
-Authorization: AWS ${s3Key}:${signature}
-Content-Type: text/plain
-EOF
-  curl -v -k -X DELETE -H "$(cat headers.txt)" https://${bucket}.s3.amazonaws.com
+#  s3Key=${AWS_ACCESS_KEY_ID}
+#  s3Secret=${AWS_SECRET_ACCESS_KEY}
+#  signature=$(echo -en "${stringToSign}" | openssl sha1 -hmac ${AWS_SECRET_ACCESS_KEY} -binary | base64)
+#  echo "Deleting https://${bucket}.s3.amazonaws.com/${file}..."
+#  echo << EOF >> headers.txt
+#DELETE ${resource} HTTP/1.1
+#Host: ${bucket}.s3.amazonaws.com
+#Date: ${dateValue}
+#Authorization: AWS ${AWS_ACCESS_KEY_ID}:${signature}
+#Content-Type: text/plain
+#EOF
+#  curl -v -k -X DELETE -H "$(cat headers.txt)" https://${bucket}.s3.amazonaws.com
   
   #curl -k -X DELETE \
   #  -H "DELETE ${resource} HTTP/1.1" \
   #  -H "Host: ${bucket}.s3.amazonaws.com" \
   #  -H "Date: ${dateValue}" \
-  #  -H "Authorization: AWS ${s3Key}:${signature}" \
+  #  -H "Authorization: AWS ${AWS_ACCESS_KEY_ID}:${signature}" \
   #  -H "Content-Type: text/plain" \
   #  https://${bucket}.s3.amazonaws.com
 }
