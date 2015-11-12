@@ -117,7 +117,7 @@ delete() {
   yum -y install epel-release
   yum -y install python-pip
   pip install awscli
-  aws s3 sync /data/repodata/ s3://${bucket}/${file}
+  aws s3 sync /data/repository/ s3://${bucket}/${file}
 }
 
 readargs "$@"
