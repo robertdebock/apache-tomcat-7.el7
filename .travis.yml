@@ -10,7 +10,7 @@ env:
     - RELEASE="1"
     - DIST="el7"
     - DIR="/data"
-    - CONTAINER="robertdebock/docker-centos7"
+    - CONTAINER="robertdebock/docker-centos7-full"
     
 script:
 # Build the RPM(s).
