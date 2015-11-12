@@ -115,6 +115,7 @@ checkargs() {
 
 delete() {
   yum -y install openssl
+  yum -y install epel-release
   yum -y install python-pip
   pip install awscli
   resource="/${bucket}/${file}"
