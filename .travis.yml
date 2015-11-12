@@ -23,7 +23,7 @@ script:
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/createrepo.sh
 
 # Publish to Amazon S3.
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -f ${PACKAGE}-${VERSION}-${RELEASE}.${DIST}.x86_64.rpm
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -d /data/repository/
 
 notifications:
   email: false
