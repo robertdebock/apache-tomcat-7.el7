@@ -116,7 +116,7 @@ delete() {
   yum -y install epel-release
   yum -y install python-pip
   pip install awscli
-  aws s3 rm se://${bucket}/repodata/ --recursive
+  aws s3 rm s3://${bucket}/repodata/ --recursive
   aws s3 sync ${directory} s3://${bucket}
 }
 
