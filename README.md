@@ -17,6 +17,8 @@ The RPMs are available on [Amazon S3](https://s3-eu-west-1.amazonaws.com/apache-
 And run:
 
     yum install apache-tomcat
+
+Or [have a look in the repository](http://apache-tomcat7.el7.s3-eu-west-1.amazonaws.com/index.html) and download the RPM's.
     
 Optional extra packages are:
 - apache-tomcat-manager
