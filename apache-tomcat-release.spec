@@ -28,7 +28,7 @@ rm -rf $RPM_BUILD_ROOT
  
 %files
 %defattr(-,root,root,-)
-/etc/yum.repos.d/demo-s3-rpm.repo
+/etc/yum.repos.d/apache-tomcat-release-el7.repo
  
 %changelog
 * Fri Nov 13 2015 Robert de Bock <robert@meinit.nl> 1.1
