@@ -8,11 +8,15 @@ This repository contains sources of [Apache Tomcat 7](http://tomcat.apache.org) 
 
 The RPMs are available on [Amazon S3](https://s3-eu-west-1.amazonaws.com/apache-tomcat7.el7/). To use these packages, copy this text into /etc/yum.repos.d/robertdebock.repo:
 
-    [robertdebock]
-    name=Robert de Bock
+    [rpm-repos-el7]
+    name=RPM Repos EL7
     baseurl=https://s3-eu-west-1.amazonaws.com/apache-tomcat7.el7/
     enabled=1
     gpgcheck=0
+
+Or simply run:
+
+    wget https://s3-eu-west-1.amazonaws.com/rpm-repos-el7/rpm-repos-el7-1-1.el7.noarch.rpm
 
 And run:
 
