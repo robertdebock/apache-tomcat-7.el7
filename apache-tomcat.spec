@@ -63,6 +63,7 @@ BuildArch: noarch
 The host-manager web application of Apache Tomcat.
 
 %prep
+curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
 
 %setup -q -n %{name}-%{version}-src
 cat << EOF >> build.properties
