@@ -103,16 +103,6 @@ main() {
     echo
     exit 1
   fi
-  which curl > /dev/null 2>&1
-  if [ $? = 0 ] ; then
-    echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
-    curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
-    echo "Done downloading."
-  else
-    echo "The program curl is missing."
-    echo
-    exit 2
-  fi
   if [ -f /data/${package}.spec ] ; then
     sed -i 's/Version: .*/Version: '${version}'/' /data/${package}.spec
     sed -i 's/Release: .*/Release: '${release}.${dist}'/' /data/${package}.spec
