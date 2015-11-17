@@ -5,6 +5,7 @@ Summary: Open source software implementation of the Java Servlet and JavaServer 
 Group: Productivity/Networking/Web/Servers
 License: Apache Software License.
 Url: http://tomcat.apache.org
+Source: %{name}-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
@@ -64,7 +65,7 @@ The host-manager web application of Apache Tomcat.
 %prep
 curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
 
-%setup -q -n %{name}-%{version}-src
+#%setup -q -n %{name}-%{version}-src
 cat << EOF >> build.properties
 # This tells ant to install software in a specific directory.
 base.path=%{buildroot}/opt/%{name}
