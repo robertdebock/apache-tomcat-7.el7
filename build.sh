@@ -114,6 +114,7 @@ main() {
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
   yum -y install  ant java-1.6.0-openjdk java-1.6.0-openjdk-devel
+  curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
   cp /data/${package}.service /data/rpmbuild/SOURCES/
   rpmbuild --define "_topdir /data/rpmbuild" -bb /data/${package}.spec
 }
