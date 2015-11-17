@@ -62,6 +62,8 @@ BuildArch: noarch
 %description host-manager
 The host-manager web application of Apache Tomcat.
 
+%prep
+
 %setup -n %{name}-%{version}-src
 cat << EOF >> build.properties
 # This tells ant to install software in a specific directory.
