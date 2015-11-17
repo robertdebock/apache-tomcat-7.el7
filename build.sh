@@ -111,10 +111,19 @@ main() {
     echo
     exit 3
   fi
+  which curl > /dev/null 2>&1
+  if [ $? = 0 ] ; then
+    echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
+    curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
+   echo "Done downloading."
+  else
+    echo "The program curl is missing."
+    echo
+    exit 2
+  fi
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
   yum -y install  ant java-1.6.0-openjdk java-1.6.0-openjdk-devel
-  curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
   cp /data/${package}.service /data/rpmbuild/SOURCES/
   rpmbuild --define "_topdir /data/rpmbuild" -bb /data/${package}.spec
 }
