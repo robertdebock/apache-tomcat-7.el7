@@ -72,6 +72,8 @@ EOF
 
 %build
 update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk.x86_64/bin/javac
+pwd
+ls -lsa
 ant
 
 %install
