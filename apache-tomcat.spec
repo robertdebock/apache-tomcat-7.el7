@@ -5,7 +5,6 @@ Summary: Open source software implementation of the Java Servlet and JavaServer 
 Group: Productivity/Networking/Web/Servers
 License: Apache Software License.
 Url: http://tomcat.apache.org
-Source: %{name}-%{version}-src.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
