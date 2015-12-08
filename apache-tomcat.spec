@@ -74,8 +74,6 @@ EOF
 
 %build
 update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk.x86_64/bin/javac
-pwd
-ls -lsa
 ant
 
 %install
@@ -143,6 +141,8 @@ esac
 /opt/%{name}/webapps/host-manager
 
 %changelog
+* Tue Dec 8 2015 - robert (at) meinit.nl
+- Removed debugging options.
 * Thu Oct 29 2015 - robert (at) meinit.nl
 - Cleaned up the RPM a bit.
 * Fri Oct 23 2015 - robert (at) meinit.nl
