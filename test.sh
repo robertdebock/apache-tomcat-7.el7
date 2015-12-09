@@ -99,6 +99,7 @@ main() {
     yum -y localinstall /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
     su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh start"
     sleep 10
+    curl http://localhost:8080/
     su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh stop"
   else
     echo "Package /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm not found."
