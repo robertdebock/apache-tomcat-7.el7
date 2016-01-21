@@ -12,7 +12,7 @@ env:
     - DIR="/data"
     - CONTAINER="robertdebock/docker-centos7-full"
     
-script:
+install:
 # Build the RPM(s).
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 
