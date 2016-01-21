@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 usage() {
   echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE -d DIST"
@@ -113,16 +113,13 @@ main() {
   fi
   which curl > /dev/null 2>&1
   if [ $? = 0 ] ; then
-    echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
-    ls -l /data/rpmbuild/SOURCES/
-    curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
-    ls -l /data/rpmbuild/SOURCES/
-    if [ -f /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ] ; then
-      echo "Done downloading."
+    url="http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
+    echo "Downloading: ${url}"
+    statuscode=$(curl -s -o /dev/null -w "%{http_code}\n" ${url})
+    if [ $statuscode = 200 ] ; then
+      curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ${url}
     else
-      echo "FAILED downloading"
-      exit 1
-    fi
+      echo "Failed to download ${url}."
   else
     echo "The program curl is missing."
     echo
