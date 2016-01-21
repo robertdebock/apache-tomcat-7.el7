@@ -121,6 +121,7 @@ main() {
     else
       echo "Failed to download ${url}."
       exit 1
+    fi
   else
     echo "The program curl is missing."
     echo
