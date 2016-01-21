@@ -115,7 +115,12 @@ main() {
   if [ $? = 0 ] ; then
     echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
     curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
-   echo "Done downloading."
+    if [ $? = 0 ] ; then
+      echo "Done downloading."
+    else
+      echo "FAILED"
+      exit 1
+    fi
   else
     echo "The program curl is missing."
     echo
