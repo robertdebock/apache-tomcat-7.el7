@@ -120,6 +120,7 @@ main() {
       curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ${url}
     else
       echo "Failed to download ${url}."
+      exit 1
   else
     echo "The program curl is missing."
     echo
