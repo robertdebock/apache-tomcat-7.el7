@@ -115,10 +115,10 @@ main() {
   if [ $? = 0 ] ; then
     echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
     curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
-    if [ $? = 0 ] ; then
+    if [ -f /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ] ; then
       echo "Done downloading."
     else
-      echo "FAILED"
+      echo "FAILED downloading"
       exit 1
     fi
   else
