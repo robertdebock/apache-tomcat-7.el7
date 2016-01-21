@@ -22,11 +22,9 @@ install:
 # Create a repository. (Can be used to publish to i.e. Amazon S3)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/createrepo.sh
 
+script:
 # Publish to Amazon S3.
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -d /data/repository/
-
-script:
-- echo "Done: $(date)"
 
 notifications:
   email: false
