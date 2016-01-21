@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 usage() {
   echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE -d DIST"
@@ -114,7 +114,9 @@ main() {
   which curl > /dev/null 2>&1
   if [ $? = 0 ] ; then
     echo "Downloading: http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
+    ls -l /data/rpmbuild/SOURCES/
     curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz
+    ls -l /data/rpmbuild/SOURCES/
     if [ -f /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ] ; then
       echo "Done downloading."
     else
