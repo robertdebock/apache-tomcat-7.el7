@@ -111,22 +111,17 @@ main() {
     echo
     exit 3
   fi
-  which curl
-  if [ $? = 0 ] ; then
-    url="http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
-    echo "Downloading: ${url}"
-    statuscode=$(curl -s -o /dev/null -w "%{http_code}\n" ${url})
-    if [ $statuscode = 200 ] ; then
-      curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ${url}
-    else
-      echo "Failed to download ${url}."
-      exit 1
-    fi
+
+  url="http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
+  echo "Downloading: ${url}"
+  statuscode=$(curl -s -o /dev/null -w "%{http_code}\n" ${url})
+  if [ $statuscode = 200 ] ; then
+    curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ${url}
   else
-    echo "The program curl is missing."
-    echo
-    exit 2
+    echo "Failed to download ${url}."
+    exit 1
   fi
+
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
   yum -y install  ant java-1.6.0-openjdk java-1.6.0-openjdk-devel
