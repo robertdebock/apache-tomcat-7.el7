@@ -17,7 +17,7 @@ install:
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 
 # Test the installation of the RPM.
- - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/test.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/test.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
 
 # Create a repository. (Can be used to publish to i.e. Amazon S3)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/createrepo.sh
