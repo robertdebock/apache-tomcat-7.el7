@@ -1,12 +1,7 @@
 #!/usr/bin/env bats
 
-@test "Testing variable dir: ${dir}." {
-    run test -d ${dir}
-    [ $status -eq 0 ]
-}
-
 @test "Testing the installation of ${package}." {
-    run rpm -Uvh ${dir}/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
+    run yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
     [ $status -eq 0 ]
 }
 
