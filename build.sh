@@ -111,6 +111,7 @@ main() {
     echo
     exit 3
   fi
+  yum -y install curl
   which curl > /dev/null 2>&1
   if [ $? = 0 ] ; then
     url="http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
