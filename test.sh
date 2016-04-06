@@ -94,20 +94,48 @@ checkargs() {
   fi
 }
 
-main() {
-  if [ -f /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm ] ; then
-    yum -y localinstall /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
-    su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh start"
-    sleep 10
-    curl http://localhost:8080/
-    su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh stop"
-  else
+precheck() {
+  if [ ! -f /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm ] ; then
     echo "Package /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm not found."
     echo
     exit 1
   fi
 }
 
+install() {
+  yum -y localinstall /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
+}
+
+start() {
+  su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh start"
+}
+
+access() {
+  sleep 10
+  curl http://localhost:8080/
+}
+
+stop() {
+  su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh stop"
+}
+
+uninstall() {
+  yum -y erase ${package}
+}
+
+postcheck() {
+  rpm -q ${package} > /dev/null
+  if [ $? = 0 ] ; then
+   echo "Package was not removed."
+  fi
+}
+
 readargs "$@"
 checkargs
-main
+precheck
+install
+start
+access
+stop
+uninstall
+postcheck
