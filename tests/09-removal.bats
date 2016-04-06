@@ -1,36 +1,36 @@
 #!/usr/bin/env bats
 
-@test "Testing the removal of ${PACKAGE}." {
-    run rpm -e ${PACKAGE}
+@test "Testing the removal of ${package}." {
+    run rpm -e ${package}
     [ $status -eq 0 ]
 }
 
-@test "Testing the removal of ${PACKAGE}-manager." {
-    run rpm -e ${PACKAGE}-manager
+@test "Testing the removal of ${package}-manager." {
+    run rpm -e ${package}-manager
     [ $status -eq 0 ]
 }
 
-@test "Testing the removal of ${PACKAGE}-ROOT." {
-    run rpm -e ${PACKAGE}-ROOT
+@test "Testing the removal of ${package}-ROOT." {
+    run rpm -e ${package}-ROOT
     [ $status -eq 0 ]
 }
 
-@test "Testing the removal of ${PACKAGE}-docs." {
-    run rpm -e ${PACKAGE}-docs
+@test "Testing the removal of ${package}-docs." {
+    run rpm -e ${package}-docs
     [ $status -eq 0 ]
 }
 
-@test "Testing the removal of ${PACKAGE}-examples." {
-    run rpm -e ${PACKAGE}-examples
+@test "Testing the removal of ${package}-examples." {
+    run rpm -e ${package}-examples
     [ $status -eq 0 ]
 }
 
-@test "Testing the removal of ${PACKAGE}-tomcat-host-manager." {
-    run rpm -e ${PACKAGE}-tomcat-host-manager
+@test "Testing the removal of ${package}-tomcat-host-manager." {
+    run rpm -e ${package}-tomcat-host-manager
     [ $status -eq 0 ]
 }
 
-@test "Testing the removal of ${PACKAGE}-tomcat-debuginfo." {
-    run rpm -e ${PACKAGE}-debuginfo
+@test "Testing the removal of ${package}-tomcat-debuginfo." {
+    run rpm -e ${package}-debuginfo
     [ $status -eq 0 ]
 }

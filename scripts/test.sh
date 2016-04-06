@@ -116,5 +116,4 @@ readargs "$@"
 checkargs
 installbats
 
-export DIR PACKAGE VERSION RELEASE DIST
 bats /data/tests
