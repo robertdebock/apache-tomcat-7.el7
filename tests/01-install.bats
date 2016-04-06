@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-@test "Testing variable dir: ${dir}."
+@test "Testing variable dir: ${dir}." {
     run test -f ${dir}
     [ $status -eq 0 ]
 }
