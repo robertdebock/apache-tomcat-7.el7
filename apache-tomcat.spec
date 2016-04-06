@@ -9,7 +9,7 @@ Source: %{name}-%{version}-src.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
-#BuildRequires: java-1.6.0-openjdk
+BuildRequires: java-1.6.0-openjdk
 BuildRequires: java-1.7.0-openjdk
 Requires: java
 BuildArch: x86_64
@@ -65,15 +65,18 @@ The host-manager web application of Apache Tomcat.
 %prep
 
 %setup -q -n %{name}-%{version}-src
+# Find the path for java home:
+java7home=$(find /usr/lib/jvm -type d -name 'java-1.7.0-openjdk*')
+
 cat << EOF >> build.properties
 # This tells ant to install software in a specific directory.
 base.path=%{buildroot}/opt/%{name}
 # Building happens with java 1.6, but to make websockets work, java 1.7 needs to be available.
-java.7.home=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+java.7.home=${java7home}
 EOF
 
 %build
-#update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk.x86_64/bin/javac
+update-alternatives --set javac /usr/lib/jvm/java-1.6.0-openjdk.x86_64/bin/javac
 ant
 
 %install
