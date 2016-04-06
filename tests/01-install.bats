@@ -10,6 +10,11 @@
     [ $status -eq 0 ]
 }
 
+@test "Tesing if ${package}-ROOT exists." {
+    run test -f ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.${dist}.noarch.rpm
+    [ $status -eq 0 ]
+}
+
 @test "Testing the installation of ${package}-ROOT." {
     run rpm -Uvh ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.${dist}.noarch.rpm
     [ $status -eq 0 ]
