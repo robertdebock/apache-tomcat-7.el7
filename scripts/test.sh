@@ -109,6 +109,6 @@ installbats() {
 readargs "$@"
 checkargs
 precheck
-install
+installbats
 
 bats /data/tests
