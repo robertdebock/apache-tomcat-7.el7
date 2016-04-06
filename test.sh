@@ -102,6 +102,10 @@ precheck() {
   fi
 }
 
+installbats() {
+  yum -y install bats
+}
+
 install() {
   yum -y localinstall /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
 }
@@ -111,7 +115,7 @@ start() {
 }
 
 access() {
-  sleep 10
+  yum -y install curl
   curl http://localhost:8080/
 }
 
