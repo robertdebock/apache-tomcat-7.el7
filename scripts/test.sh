@@ -1,15 +1,17 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE -d DIST"
+  echo "Usage: $0 -d DIR -p PACKAGE -v VERSION -r RELEASE -D DIST"
   echo
+  echo "  -d DIR"
+  echo "    The name where the package can be found, like \"/data\"."
   echo "  -p PACKAGE"
   echo "    The name of the package, like \"apache-tomcat\"."
   echo "  -v VERSION"
   echo "    The version of the package, like \"7.0.65\"."
   echo "  -r RELEASE"
   echo "    The release of the package, like \"1\"."
-  echo "  -d DIST"
+  echo "  -D DIST"
   echo "    The distribution tag of the package, like \"el7\"."
   exit 1
 }
@@ -17,6 +19,17 @@ usage() {
 readargs() {
   while [ "$#" -gt 0 ] ; do
     case "$1" in
+      -d)
+        if [ "$2" ] ; then
+          dir="$2"
+          shift ; shift
+        else
+          echo "Missing a value for $1."
+          echo
+          shift
+          usage
+        fi
+      ;;
       -p)
         if [ "$2" ] ; then
           package="$2"
@@ -50,7 +63,7 @@ readargs() {
           usage
         fi
       ;;
-      -d)
+      -D)
         if [ "$2" ] ; then
           dist="$2"
           shift ; shift
@@ -94,14 +107,6 @@ checkargs() {
   fi
 }
 
-precheck() {
-  if [ ! -f /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm ] ; then
-    echo "Package /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm not found."
-    echo
-    exit 1
-  fi
-}
-
 installbats() {
   yum -y install epel-release
   yum -y install bats
@@ -109,7 +114,7 @@ installbats() {
 
 readargs "$@"
 checkargs
-precheck
 installbats
 
+export DIR PACKAGE VERSION RELEASE DIST
 bats /data/tests
