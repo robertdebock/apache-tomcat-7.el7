@@ -117,4 +117,5 @@ checkargs
 installbats
 
 export dir package version release dist
+find ${dir}
 bats /data/tests
