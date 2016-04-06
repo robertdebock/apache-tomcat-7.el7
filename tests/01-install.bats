@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 @test "Testing variable dir: ${dir}." {
-    run test -f ${dir}
+    run test -d ${dir}
     [ $status -eq 0 ]
 }
 

@@ -117,5 +117,5 @@ checkargs
 installbats
 
 export dir package version release dist
-find ${dir}
+find ${dir} -name '*.rpm'
 bats /data/tests
