@@ -124,7 +124,7 @@ main() {
 
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
-  yum -y install  ant java-1.6.0-openjdk java-1.6.0-openjdk-devel
+  yum -y install  ant java-1.7.0-openjdk java-1.7.0-openjdk-devel
   cp /data/${package}.service /data/rpmbuild/SOURCES/
   rpmbuild --define "_topdir /data/rpmbuild" -bb /data/${package}.spec
 }
