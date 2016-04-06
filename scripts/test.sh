@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -d DIRECTORY -s SPECFILE -v VERSION"
+  echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE -d DIST"
   echo
   echo "  -p PACKAGE"
   echo "    The name of the package, like \"apache-tomcat\"."
@@ -106,40 +106,9 @@ installbats() {
   yum -y install bats
 }
 
-install() {
-  yum -y localinstall /data/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
-}
-
-start() {
-  su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh start"
-  sleep 10
-}
-
-access() {
-  curl http://localhost:8080/
-}
-
-stop() {
-  su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh stop"
-}
-
-uninstall() {
-  yum -y erase ${package}
-}
-
-postcheck() {
-  rpm -q ${package} > /dev/null
-  if [ $? = 0 ] ; then
-   echo "Package was not removed."
-  fi
-}
-
 readargs "$@"
 checkargs
 precheck
 install
-start
-access
-stop
-uninstall
-postcheck
+
+bats /data/tests
