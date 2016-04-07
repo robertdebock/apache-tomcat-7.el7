@@ -118,4 +118,7 @@ installbats
 
 export dir package version release dist
 find ${dir} -name '*.rpm'
-bats /data/tests
+yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-manager-${version}-${release}.${dist}.x86_64.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.${dist}.noarch.rpm
+#bats /data/tests
