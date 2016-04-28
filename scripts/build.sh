@@ -113,7 +113,7 @@ main() {
   fi
   
   yum -y install spectool
-  spectool /data/${package}.spec
+  spectool --get-files /data/${package}.spec
 
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
