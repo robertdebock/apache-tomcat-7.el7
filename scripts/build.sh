@@ -112,7 +112,7 @@ main() {
     exit 3
   fi
   
-  yum install spectool
+  yum -y install spectool
   spectool /data/${package}.spec
 
   chown root:root /data/${package}.spec
