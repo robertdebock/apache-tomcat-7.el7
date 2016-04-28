@@ -9,8 +9,8 @@ Source: http://apache.xl-mirror.nl/tomcat/tomcat-7/v%{version}/src/%{name}-%{ver
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 BuildRequires: ant
-BuildRequires: java-1.6.0-openjdk
-BuildRequires: java-1.7.0-openjdk
+BuildRequires: java-1.6.0-openjdk java-1.6.0-openjdk-devel
+BuildRequires: java-1.7.0-openjdk java-1.7.0-openjdk-devel
 Requires: java
 BuildArch: x86_64
 
