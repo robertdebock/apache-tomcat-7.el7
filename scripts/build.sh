@@ -113,6 +113,7 @@ main() {
   fi
   
   yum -y install spectool
+  cd /data/rpmbuild/SOURCES/
   spectool --get-files /data/${package}.spec
 
   chown root:root /data/${package}.spec
