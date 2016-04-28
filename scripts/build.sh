@@ -112,15 +112,7 @@ main() {
     exit 3
   fi
 
-  url="http://ftp.nluug.nl/internet/apache/tomcat/tomcat-7/v${version}/src/${package}-${version}-src.tar.gz"
-  echo "Downloading: ${url}"
-  statuscode=$(curl -s -o /dev/null -w "%{http_code}\n" ${url})
-  if [ $statuscode = 200 ] ; then
-    curl -s -o /data/rpmbuild/SOURCES/${package}-${version}-src.tar.gz ${url}
-  else
-    echo "Failed to download ${url}."
-    exit 1
-  fi
+  spectool /data/${package}.spec
 
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
