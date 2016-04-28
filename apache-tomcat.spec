@@ -20,7 +20,7 @@ Apache Tomcat is an open source software implementation of the Java Servlet and 
 %package manager
 Summary: The management web application of Apache Tomcat.
 Group: System Environmnet/Applications
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}(x86_64) = %{version}-%{release}
 BuildArch: noarch
 
 %description manager
@@ -29,7 +29,7 @@ The management web application of Apache Tomcat.
 %package ROOT
 Summary: The ROOT web application of Apache Tomcat.
 Group: System Environmnet/Applications
-Requires: %{name}-%{version}-%{release}
+Requires: %{name}(x86_64) = %{version}-%{release}
 BuildArch: noarch
 
 %description ROOT
@@ -38,7 +38,7 @@ The ROOT web application of Apache Tomcat.
 %package docs
 Summary: The docs web application of Apache Tomcat.
 Group: System Environmnet/Applications
-Requires: %{name}-%{version}-%{release}
+Requires: %{name}(x86_64) = %{version}-%{release}
 BuildArch: noarch
 
 %description docs
@@ -47,7 +47,7 @@ The docs web application of Apache Tomcat.
 %package examples
 Summary: The examples web application of Apache Tomcat.
 Group: System Environmnet/Applications
-Requires: %{name}-%{version}-%{release}
+Requires: %{name}(x86_64) = %{version}-%{release}
 BuildArch: noarch
 
 %description examples
@@ -56,7 +56,7 @@ The examples web application of Apache Tomcat.
 %package host-manager
 Summary: The host-manager web application of Apache Tomcat.
 Group: System Environmnet/Applications
-Requires: %{name}-%{version}-%{release}
+Requires: %{name}(x86_64) = %{version}-%{release}
 BuildArch: noarch
 
 %description host-manager
