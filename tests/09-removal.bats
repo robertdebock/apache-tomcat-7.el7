@@ -1,12 +1,12 @@
 #!/usr/bin/env bats
 
-@test "Testing the removal of ${package}-tomcat-debuginfo." {
+@test "Testing the removal of ${package}-debuginfo." {
     run rpm -e ${package}-debuginfo
     [ $status -eq 0 ]
 }
 
-@test "Testing the removal of ${package}-tomcat-host-manager." {
-    run rpm -e ${package}-tomcat-host-manager
+@test "Testing the removal of ${package}-host-manager." {
+    run rpm -e ${package}-host-manager
     [ $status -eq 0 ]
 }
 

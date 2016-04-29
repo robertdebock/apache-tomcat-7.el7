@@ -5,13 +5,13 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing the installation of ${package}-manager." {
-    run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-manager-${version}-${release}.noarch.rpm
+@test "Testing the installation of ${package}-debuginfo." {
+    run yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-debuginfo-${version}-${release}.x86_64.rpm
     [ $status -eq 0 ]
 }
 
-@test "Tesing if ${package}-ROOT exists." {
-    run test -f ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.noarch.rpm
+@test "Testing the installation of ${package}-manager." {
+    run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-manager-${version}-${release}.noarch.rpm
     [ $status -eq 0 ]
 }
 
@@ -30,12 +30,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing the installation of ${package}-tomcat-host-manager." {
-    run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-tomcat-host-manager-${version}-${release}.noarch.rpm
-    [ $status -eq 0 ]
-}
-
-@test "Testing the installation of ${package}-tomcat-debuginfo." {
-    run yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-debuginfo-${version}-${release}.x86_64.rpm
+@test "Testing the installation of ${package}-host-manager." {
+    run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-host-manager-${version}-${release}.noarch.rpm
     [ $status -eq 0 ]
 }

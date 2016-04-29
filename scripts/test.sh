@@ -94,18 +94,12 @@ installbats() {
   yum -y install bats
 }
 
+testusingbats() {
+  export dir package version release
+  bats /data/tests
+}
+
 readargs "$@"
 checkargs
 installbats
-
-export dir package version release
-find ${dir} -name '*.rpm'
-yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.x86_64.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-debuginfo-${version}-${release}.x86_64.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-manager-${version}-${release}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-examples-${version}-${release}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-docs-${version}-${release}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-host-manager-${version}-${release}.noarch.rpm
-
-#bats /data/tests
+testusingbats
