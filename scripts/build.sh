@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 usage() {
   echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE"
@@ -100,7 +100,7 @@ main() {
 
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
-  yum -y install  ant java-1.6.0-openjdk java-1.6.0-openjdk-devel java-1.7.0-openjdk java-1.7.0-openjdk-devel
+  yum -y install $(/data/scripts/buildrequires.sh /data/${pacakge.spec})
   cp /data/${package}.service /data/rpmbuild/SOURCES/
   rpmbuild --define "_topdir /data/rpmbuild" -bb /data/${package}.spec
 }
