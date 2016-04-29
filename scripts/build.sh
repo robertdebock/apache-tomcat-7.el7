@@ -1,7 +1,7 @@
 #!/bin/sh -x
 
 usage() {
-  echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE -d DIST"
+  echo "Usage: $0 -p PACKAGE -v VERSION -r RELEASE"
   echo
   echo "  -p PACKAGE"
   echo "    The name of the package, like \"apache-tomcat\"."
@@ -9,8 +9,6 @@ usage() {
   echo "    The version of the package, like \"7.0.65\"."
   echo "  -r RELEASE"
   echo "    The release of the package, like \"1\"."
-  echo "  -d DIST"
-  echo "    The distribution tag of the package, like \"el7\"."
   exit 1
 }
 
@@ -50,17 +48,6 @@ readargs() {
           usage
         fi
       ;;
-      -d)
-        if [ "$2" ] ; then
-          dist="$2"
-          shift ; shift
-        else
-          echo "Missing a value for $1."
-          echo
-          shift
-          usage
-        fi
-      ;;
       *)
         echo "Unknown option or argument $1."
         echo
@@ -87,11 +74,6 @@ checkargs() {
     echo
     usage
   fi
-  if [ ! "${dist}" ] ; then
-    echo "Missing dist."
-    echo
-    usage
-  fi
 }
 
 main() {
@@ -105,7 +87,7 @@ main() {
   fi
   if [ -f /data/${package}.spec ] ; then
     sed -i 's/Version: .*/Version: '${version}'/' /data/${package}.spec
-    sed -i 's/Release: .*/Release: '${release}.${dist}'/' /data/${package}.spec
+    sed -i 's/Release: .*/Release: '${release}'/' /data/${package}.spec
   else
     echo "The file /data/${package}.spec does not exist."
     echo
