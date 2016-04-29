@@ -7,23 +7,22 @@ env:
   global:
     - PACKAGE="apache-tomcat"
     - VERSION="7.0.69"
-    - RELEASE="1"
-    - DIST="el7"
+    - RELEASE="1.el7"
     - DIR="/data"
     - CONTAINER="centos:7"
     
 install:
 # Build the RPM(s).
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -d ${DIST}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/build.sh -p ${PACKAGE} -v ${VERSION} -r ${RELEASE}
 
 # Test the installation of the RPM.
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/test.sh -d ${DIR} -p ${PACKAGE} -v ${VERSION} -r ${RELEASE} -D ${DIST}
+- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/test.sh -d ${DIR} -p ${PACKAGE} -v ${VERSION} -r ${RELEASE}
 
-# Create a repository. (Can be used to publish to i.e. Amazon S3)
+# Create repositorymetadata. (Can be used to publish to i.e. Amazon S3)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/createrepo.sh
 
 script:
-  # Publish to Amazon S3.
+# Publish to Amazon S3.
   - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -d /data/repository/
 
 notifications:

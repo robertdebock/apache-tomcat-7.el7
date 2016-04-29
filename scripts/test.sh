@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 -d DIR -p PACKAGE -v VERSION -r RELEASE -D DIST"
+  echo "Usage: $0 -d DIR -p PACKAGE -v VERSION -r RELEASE"
   echo
   echo "  -d DIR"
   echo "    The name where the package can be found, like \"/data\"."
@@ -11,8 +11,6 @@ usage() {
   echo "    The version of the package, like \"7.0.65\"."
   echo "  -r RELEASE"
   echo "    The release of the package, like \"1\"."
-  echo "  -D DIST"
-  echo "    The distribution tag of the package, like \"el7\"."
   exit 1
 }
 
@@ -63,17 +61,6 @@ readargs() {
           usage
         fi
       ;;
-      -D)
-        if [ "$2" ] ; then
-          dist="$2"
-          shift ; shift
-        else
-          echo "Missing a value for $1."
-          echo
-          shift
-          usage
-        fi
-      ;;
       *)
         echo "Unknown option or argument $1."
         echo
@@ -100,11 +87,6 @@ checkargs() {
     echo
     usage
   fi
-  if [ ! "${dist}" ] ; then
-    echo "Missing dist."
-    echo
-    usage
-  fi
 }
 
 installbats() {
@@ -116,14 +98,14 @@ readargs "$@"
 checkargs
 installbats
 
-export dir package version release dist
+export dir package version release
 find ${dir} -name '*.rpm'
-yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.${dist}.x86_64.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-debuginfo-${version}-${release}.${dist}.x86_64.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.${dist}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-manager-${version}-${release}.${dist}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-examples-${version}-${release}.${dist}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-docs-${version}-${release}.${dist}.noarch.rpm
-yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-host-manager-${version}-${release}.${dist}.noarch.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-${version}-${release}.x86_64.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/x86_64/${package}-debuginfo-${version}-${release}.x86_64.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.noarch.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-manager-${version}-${release}.noarch.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-examples-${version}-${release}.noarch.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-docs-${version}-${release}.noarch.rpm
+yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-host-manager-${version}-${release}.noarch.rpm
 
 #bats /data/tests
