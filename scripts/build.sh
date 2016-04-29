@@ -100,7 +100,7 @@ main() {
 
   chown root:root /data/${package}.spec
   yum -y groupinstall "Development Tools"
-  yum -y install $(/data/scripts/buildrequires.sh /data/${package.spec})
+  yum -y install $(/data/scripts/buildrequires.sh /data/${package}.spec)
   cp /data/${package}.service /data/rpmbuild/SOURCES/
   rpmbuild --define "_topdir /data/rpmbuild" -bb /data/${package}.spec
 }
