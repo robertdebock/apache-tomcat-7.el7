@@ -112,14 +112,22 @@ checkargs() {
   fi
 }
 
-delete() {
+perpare() {
   yum -y install epel-release
   yum -y install python-pip
   pip install awscli
+}
+
+delete() {
   aws s3 rm s3://${bucket}/repodata/ --recursive
+}
+
+upload() {
   aws s3 sync ${directory} s3://${bucket}
 }
 
 readargs "$@"
-checkargs 
+checkargs
+perpare
 delete
+upload
