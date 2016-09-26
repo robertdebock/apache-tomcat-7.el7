@@ -6,7 +6,7 @@ services:
 env:
   global:
     - PACKAGE="apache-tomcat"
-    - VERSION="7.0.71"
+    - VERSION="7.0.72"
     - RELEASE="1.el7"
     - DIR="/data"
     - CONTAINER="centos:7"
