@@ -1,5 +1,10 @@
 @test "Checking for the apache-tomcat user." {
-    id apache-tomcat
+    getent passwd apache-tomcat
+    [ $status -eq 0 ]
+}
+
+@test "Checking for the apache-tomcat group." {
+    getent group apache-tomcat
     [ $status -eq 0 ]
 }
 
