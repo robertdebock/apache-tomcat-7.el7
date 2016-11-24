@@ -16,7 +16,7 @@
 }
 
 @test "Testing if ${package}-debuginfo is installed." {
-    run rpm -q ${package}-debugingo
+    run rpm -q ${package}-debuginfo
     [ $status -eq 0 ]
 }
 
