@@ -5,7 +5,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing if ${package} is installed."
+@test "Testing if ${package} is installed." {
     run rpm -q ${package}
     [ $status -eq 0 ]
 }
@@ -15,7 +15,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing if ${package}-debuginfo is installed."
+@test "Testing if ${package}-debuginfo is installed." {
     run rpm -q ${package}-debugingo
     [ $status -eq 0 ]
 }
@@ -25,7 +25,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing if ${package}-manager is installed."
+@test "Testing if ${package}-manager is installed." {
     run rpm -q ${package}-manager
     [ $status -eq 0 ]
 }
@@ -35,7 +35,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing if ${package}-ROOT is installed."
+@test "Testing if ${package}-ROOT is installed." {
     run rpm -q ${package}-ROOT
     [ $status -eq 0 ]
 }
@@ -45,7 +45,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing if ${package}-docs is installed."
+@test "Testing if ${package}-docs is installed." {
     run rpm -q ${package}-docs
     [ $status -eq 0 ]
 }
@@ -55,7 +55,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing if ${package}-examples is installed."
+@test "Testing if ${package}-examples is installed." {
     run rpm -q ${package}-examples
     [ $status -eq 0 ]
 }
@@ -64,7 +64,8 @@
     run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-host-manager-${version}-${release}.noarch.rpm
     [ $status -eq 0 ]
 }
-@test "Testing if ${package}-host-manager is installed."
+
+@test "Testing if ${package}-host-manager is installed." {
     run rpm -q ${package}-host-manager
     [ $status -eq 0 ]
 }
