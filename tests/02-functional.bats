@@ -1,5 +1,5 @@
 @test "Starting Apache Tomcat." {
-    service apache-tomcat start
+    /bin/su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh start"
     [ $status -eq 0 ]
 }
 
@@ -14,6 +14,6 @@
 }
 
 @test "Stopping Apache Tomcat." {
-    service apache-tomcat stop
+    /bin/su -p -s /bin/sh apache-tomcat -c "/opt/apache-tomcat/bin/catalina.sh stop"
     [ $status -eq 0 ]
 }
