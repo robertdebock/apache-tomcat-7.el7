@@ -1,3 +1,5 @@
+#!/usr/bin/env bats
+
 @test "Checking for the apache-tomcat user." {
     getent passwd apache-tomcat
     [ $status -eq 0 ]
