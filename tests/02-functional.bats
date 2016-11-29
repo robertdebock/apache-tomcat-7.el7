@@ -20,6 +20,11 @@
     [ $status -eq 0 ]
 }
 
+@test "Waiting 30 seconds." {
+    run sleep 30
+    [ $status -eq 0 ]
+}
+
 @test "Testing if context host-manager is available." {
     run curl http://localhost:8080/host-manager/
     [ $status -eq 0 ]
