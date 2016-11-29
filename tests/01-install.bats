@@ -30,7 +30,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Installing of ${package}-ROOT." {
+@test "Installing ${package}-ROOT." {
     run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-ROOT-${version}-${release}.noarch.rpm
     [ $status -eq 0 ]
 }
@@ -40,7 +40,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Installing of ${package}-docs." {
+@test "Installing ${package}-docs." {
     run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-docs-${version}-${release}.noarch.rpm
     [ $status -eq 0 ]
 }
@@ -50,7 +50,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Installing of ${package}-examples." {
+@test "Installing ${package}-examples." {
     run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-examples-${version}-${release}.noarch.rpm
     [ $status -eq 0 ]
 }
@@ -60,7 +60,7 @@
     [ $status -eq 0 ]
 }
 
-@test "Installing of ${package}-host-manager." {
+@test "Installing ${package}-host-manager." {
     run yum -y localinstall ${dir}/rpmbuild/RPMS/noarch/${package}-host-manager-${version}-${release}.noarch.rpm
     [ $status -eq 0 ]
 }
