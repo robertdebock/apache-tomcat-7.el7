@@ -15,13 +15,13 @@
     [ $status -eq 0 ]
 }
 
-@test "Testing if port 8080 is open." {
-    run curl http://localhost:8080/
+@test "Waiting 30 seconds." {
+    run sleep 30
     [ $status -eq 0 ]
 }
 
-@test "Waiting 30 seconds." {
-    run sleep 30
+@test "Testing if port 8080 is open." {
+    run curl http://localhost:8080/
     [ $status -eq 0 ]
 }
 
