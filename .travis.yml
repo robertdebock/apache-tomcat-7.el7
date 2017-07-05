@@ -21,9 +21,10 @@ install:
 # Create repositorymetadata. (Can be used to publish to i.e. Amazon S3)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/createrepo.sh
 
-script:
-# Publish to Amazon S3.
-- docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -d /data/repository/
+master:
+  script:
+  # Publish to Amazon S3.
+  - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -d /data/repository/
 
 notifications:
   email: false
