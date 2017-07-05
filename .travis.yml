@@ -1,5 +1,7 @@
 sudo: required
 
+language: ruby
+
 services:
   - docker
 
@@ -23,12 +25,13 @@ install:
 
 deploy:
   provider: s3
-  access_key_id: "${S3KEY}
-  secret_access_key: "${S3SECRET}"
+  access_key_id: ${S3KEY}
+  secret_access_key: ${S3SECRET}
   bucket: "apache-tomcat7.el7"
   region: "eu-west-1"
   skip_cleanup: true
   local_dir: /data/repository
+
 
 notifications:
   email: false
