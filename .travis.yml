@@ -23,10 +23,16 @@ install:
 # Create repositorymetadata. (Can be used to publish to i.e. Amazon S3)
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/createrepo.sh
 
-master:
-  script:
-  # Publish to Amazon S3.
-  - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -d /data/repository/
+deploy:
+  provider: s3
+  access_key_id: ${S3KEY}
+  secret_access_key: ${S3SECRET}
+  bucket: "apache-tomcat7.el7"
+  region: "eu-west-1"
+  skip_cleanup: true
+  local_dir: /data/repository
+  on:
+    branch: master
 
 notifications:
   email: false
