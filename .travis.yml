@@ -1,6 +1,6 @@
 sudo: required
 
-language: c
+language: sh
 
 services:
   - docker
@@ -31,7 +31,8 @@ deploy:
   region: "eu-west-1"
   skip_cleanup: true
   local_dir: /data/repository
-
+  on:
+    branch: master
 
 notifications:
   email: false
