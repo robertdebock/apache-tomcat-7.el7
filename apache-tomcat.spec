@@ -1,5 +1,5 @@
 Name: apache-tomcat
-Version: 7.0.79
+Version: 7.0.84
 Release: 1.el7
 Summary: Open source software implementation of the Java Servlet and JavaServer Pages technologies.
 Group: Productivity/Networking/Web/Servers
