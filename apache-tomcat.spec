@@ -75,7 +75,6 @@ java.7.home=${java7home}
 EOF
 
 %build
-update-alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk/bin/javac
 ant
 
 %install
