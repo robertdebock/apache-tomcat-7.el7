@@ -63,15 +63,14 @@ The host-manager web application of Apache Tomcat.
 
 %prep
 
-%setup -n %{name}-%{version}
+%setup -n %{name}-%{version}-src
 # Find the path for java home:
-java7home=$(find /usr/lib/jvm -type d -name 'java-1.7.0-openjdk*')
+javahome=$(find /usr/lib/jvm -type d -name 'java-1.7.0-openjdk*')
 
 cat << EOF >> build.properties
 # This tells ant to install software in a specific directory.
 base.path=%{buildroot}/opt/%{name}
-# Building happens with java 1.6, but to make websockets work, java 1.7 needs to be available.
-java.7.home=${java7home}
+java.7.home=${javahome}
 EOF
 
 %build
