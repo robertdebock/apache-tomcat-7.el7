@@ -64,7 +64,7 @@ The host-manager web application of Apache Tomcat.
 
 %prep
 
-%setup -n %{name}-%{version}-src
+%setup -n %{name}-%{version}
 # Find the path for java home:
 java7home=$(find /usr/lib/jvm -type d -name 'java-1.7.0-openjdk*')
 
